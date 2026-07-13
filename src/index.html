@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Retro Media Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="sidebar">
+      <h3>Windows Media Player</h3>
+      <ul>
+        <li>Now Playing</li>
+        <li>Media Library</li>
+        <li>Radio Tuner</li>
+        <li>Copy to Device</li>
+        <li>Skin Chooser</li>
+      </ul>
+    </div>
+
+    <div id="main">
+      <div id="visualizer">
+        <p>Ambience: Random</p>
+        <canvas id="vizCanvas"></canvas>
+      </div>
+
+      <div id="playlist">
+        <h4>Playlist</h4>
+        <ul id="playlistList">
+          <li>Sample Track — 3:21</li>
+        </ul>
+      </div>
+
+      <div id="controls">
+        <button id="prevBtn">⏮</button>
+        <button id="playPauseBtn">▶</button>
+        <button id="nextBtn">⏭</button>
+
+        <input id="seekBar" type="range" min="0" max="100" value="0">
+        <input id="volumeBar" type="range" min="0" max="100" value="80">
+      </div>
+    </div>
+  </div>
+
+  <audio id="audioPlayer"></audio>
+  <script src="player.js"></script>
+  <script src="visualizer.js"></script>
+</body>
+</html>
