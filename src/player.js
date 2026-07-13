@@ -1,3 +1,12 @@
+const themeStylesheet = document.getElementById("themeStylesheet");
+
+function setTheme(theme) {
+  if (theme === "tron") {
+    themeStylesheet.href = "style-tron.css";
+  } else {
+    themeStylesheet.href = "style.css";
+  }
+}
 const audio = document.getElementById("audioPlayer");
 const playPauseBtn = document.getElementById("playPauseBtn");
 const prevBtn = document.getElementById("prevBtn");
