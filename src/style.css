@@ -1,102 +1,93 @@
+/* ================================
+   GLOBAL STYLES
+================================ */
+
 body {
-  margin: 0;
-  font-family: Tahoma, sans-serif;
-  background: #0b1e3d;
-  color: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #1e1e1e;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-#app {
-  display: flex;
-  height: 100vh;
+/* ================================
+   PLAYER WINDOW
+================================ */
+
+.player-window {
+    width: 380px;
+    background: #ececec;
+    border: 3px solid #b5b5b5;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.4);
+    border-radius: 6px;
+    overflow: hidden;
 }
 
-/* SIDEBAR */
-#sidebar {
-  width: 220px;
-  background: linear-gradient(#1a3b6b, #0b1e3d);
-  padding: 20px;
-  border-right: 2px solid #061226;
+/* ================================
+   TITLE BAR (Retro Windows)
+================================ */
+
+.title-bar {
+    background: linear-gradient(#1a4ba3, #0f2f6d);
+    color: white;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
 }
 
-#sidebar h3 {
-  margin-top: 0;
-  font-size: 18px;
+.window-buttons button {
+    background: #dcdcdc;
+    border: 1px solid #888;
+    width: 22px;
+    height: 22px;
+    margin-left: 4px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-#sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
+.window-buttons button:hover {
+    background: #f0f0f0;
 }
 
-#sidebar li {
-  padding: 8px 0;
-  cursor: pointer;
+/* ================================
+   CONTROLS
+================================ */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px;
 }
 
-/* MAIN AREA */
-#main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+.controls button {
+    background: #dcdcdc;
+    border: 2px solid #999;
+    padding: 10px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
 }
 
-/* VISUALIZER */
-#visualizer {
-  flex: 1;
-  background: radial-gradient(circle, #1a3b6b, #0b1e3d);
-  border: 2px solid #061226;
-  margin-bottom: 20px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.controls button:hover {
+    background: #f7f7f7;
 }
 
-#visualizer p {
-  margin-bottom: 10px;
+/* ================================
+   PROGRESS BAR
+================================ */
+
+.progress-container {
+    padding: 10px 20px;
 }
 
-#vizCanvas {
-  width: 90%;
-  height: 60%;
-  background: rgba(0, 0, 0, 0.2);
+#progress-bar {
+    width: 100%;
 }
 
-/* PLAYLIST */
-#playlist {
-  background: #102544;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 2px solid #061226;
-}
-
-#playlist h4 {
-  margin-top: 0;
-}
-
-#playlist ul {
-  list-style: none;
-  padding: 0;
-}
-
-/* CONTROLS */
-#controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-#controls button {
-  background: #1a3b6b;
-  border: 1px solid #061226;
-  color: #ffffff;
-  padding: 6px 10px;
-  cursor: pointer;
-}
-
-#controls input[type="range"] {
-  flex: 1;
-}
+/* =================
