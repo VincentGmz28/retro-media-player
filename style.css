@@ -87,30 +87,43 @@ body {
   border: 2px solid #6a7a99;
   box-shadow: inset 0 0 10px #fff;
 }
-/* 💠 CLASSIC — Pixel Grid + Soft Glow Pulse 💠 */
+/* 🌊 CLASSIC — Watery Glossy Ocean Background */
 body {
   position: relative;
-  background: linear-gradient(180deg, #d7e3f4, #b8c7db);
+  background: linear-gradient(180deg, #b7d4e8, #7fb3d5);
   overflow-x: hidden;
 }
 
-/* Pixel Grid */
+/* Moving Water Waves */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
 
-  background-image:
-    linear-gradient(#ffffff20 1px, transparent 1px),
-    linear-gradient(90deg, #ffffff20 1px, transparent 1px);
-  background-size: 22px 22px;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(255,255,255,0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(255,255,255,0.25),
+      transparent 60%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.08) 0px,
+      rgba(255,255,255,0.08) 3px,
+      transparent 3px,
+      transparent 6px
+    );
 
-  animation: pixelGridMove 14s linear infinite;
-  opacity: 0.25;
+  animation: oceanWaves 12s ease-in-out infinite;
+  opacity: 0.45;
 }
 
-/* Soft Glow Pulse */
+/* Glossy Pulse */
 body::after {
   content: "";
   position: fixed;
@@ -118,22 +131,23 @@ body::after {
   pointer-events: none;
 
   background: radial-gradient(
-    circle at 30% 70%,
-    rgba(255,255,255,0.35),
+    circle at 50% 50%,
+    rgba(255,255,255,0.4),
     transparent 70%
   );
 
-  animation: classicGlowPulse 8s ease-in-out infinite;
-  opacity: 0.25;
+  animation: oceanGloss 6s ease-in-out infinite;
+  opacity: 0.35;
 }
 
-@keyframes pixelGridMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 40px 40px; }
+@keyframes oceanWaves {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(15px) translateY(-10px); }
+  100% { transform: translateX(0) translateY(0); }
 }
 
-@keyframes classicGlowPulse {
-  0% { opacity: 0.15; }
-  50% { opacity: 0.35; }
-  100% { opacity: 0.15; }
+@keyframes oceanGloss {
+  0% { opacity: 0.25; }
+  50% { opacity: 0.55; }
+  100% { opacity: 0.25; }
 }
