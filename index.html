@@ -2,8 +2,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Vinny’s Retro Media Space</title>
- <link rel="stylesheet" href="layout.css">
+
+  <!-- Base layout -->
+  <link rel="stylesheet" href="layout.css">
+
+  <!-- Theme stylesheet (switches dynamically) -->
+  <link id="skinStylesheet" rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div id="page-wrapper">
 
@@ -91,11 +97,18 @@
     </footer>
 
   </div>
+
+  <!-- Theme Switcher Script -->
   <script>
     function setSkin(file) {
       document.getElementById("skinStylesheet").href = file + "?v=" + Date.now();
     }
   </script>
+
+  <!-- Your JS files (required for media player + visualizer) -->
+  <script src="player.js"></script>
+  <script src="script.js"></script>
+  <script src="visualizer.js"></script>
 
 </body>
 </html>
