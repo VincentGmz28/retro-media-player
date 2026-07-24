@@ -92,3 +92,25 @@ body {
   border: 2px solid #00eaff;
   box-shadow: inset 0 0 20px #00eaff;
 }
+/* ⚡ TRON Lightcycle Sweep Animation ⚡ */
+.wmp-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.wmp-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+  filter: blur(8px);
+  animation: tronCycle 4s linear infinite;
+}
+
+@keyframes tronCycle {
+  0% { left: -120%; }
+  100% { left: 120%; }
+}
