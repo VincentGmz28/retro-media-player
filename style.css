@@ -87,24 +87,53 @@ body {
   border: 2px solid #6a7a99;
   box-shadow: inset 0 0 10px #fff;
 }
-/* ⭐ Classic XP Wave Motion ⭐ */
+/* 💠 CLASSIC — Pixel Grid + Soft Glow Pulse 💠 */
+body {
+  position: relative;
+  background: linear-gradient(180deg, #d7e3f4, #b8c7db);
+  overflow-x: hidden;
+}
+
+/* Pixel Grid */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
 
-  background: radial-gradient(
-    circle at 20% 80%,
-    rgba(255,255,255,0.4),
-    transparent 60%
-  );
+  background-image:
+    linear-gradient(#ffffff20 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff20 1px, transparent 1px);
+  background-size: 22px 22px;
 
-  animation: xpWave 10s ease-in-out infinite;
+  animation: pixelGridMove 14s linear infinite;
+  opacity: 0.25;
 }
 
-@keyframes xpWave {
-  0% { transform: translateX(-10%) translateY(10%); }
-  50% { transform: translateX(10%) translateY(-10%); }
-  100% { transform: translateX(-10%) translateY(10%); }
+/* Soft Glow Pulse */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at 30% 70%,
+    rgba(255,255,255,0.35),
+    transparent 70%
+  );
+
+  animation: classicGlowPulse 8s ease-in-out infinite;
+  opacity: 0.25;
+}
+
+@keyframes pixelGridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes classicGlowPulse {
+  0% { opacity: 0.15; }
+  50% { opacity: 0.35; }
+  100% { opacity: 0.15; }
 }
