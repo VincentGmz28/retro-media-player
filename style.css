@@ -87,25 +87,24 @@ body {
   border: 2px solid #6a7a99;
   box-shadow: inset 0 0 10px #fff;
 }
-/* ⭐ Classic CRT Scanlines ⭐ */
+/* ⭐ Classic XP Wave Motion ⭐ */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
 
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.08) 0px,
-    rgba(255,255,255,0.08) 2px,
-    transparent 2px,
-    transparent 4px
+  background: radial-gradient(
+    circle at 20% 80%,
+    rgba(255,255,255,0.4),
+    transparent 60%
   );
 
-  animation: classicScanlines 6s linear infinite;
+  animation: xpWave 10s ease-in-out infinite;
 }
 
-@keyframes classicScanlines {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-10%); }
+@keyframes xpWave {
+  0% { transform: translateX(-10%) translateY(10%); }
+  50% { transform: translateX(10%) translateY(-10%); }
+  100% { transform: translateX(-10%) translateY(10%); }
 }
