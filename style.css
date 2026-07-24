@@ -1,93 +1,150 @@
-/* ================================
-   GLOBAL STYLES
-================================ */
+/* ============================
+   Y2K + Retro Windows Media Player Skin
+   ============================ */
 
-body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #1e1e1e;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+#wmp-frame, .wmp-frame {
+  width: 480px;
+  background: linear-gradient(180deg, #dfe7f2 0%, #b8c4d6 100%);
+  border: 2px solid #6a7a99;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 3px #ffffff,
+    inset 0 0 8px rgba(255,255,255,0.6),
+    0 4px 12px rgba(0,0,0,0.25);
+  padding: 0;
+  overflow: hidden;
+  font-family: Tahoma, Verdana, sans-serif;
 }
 
-/* ================================
-   PLAYER WINDOW
-================================ */
+/* ============================
+   Title Bar
+   ============================ */
 
-.player-window {
-    width: 380px;
-    background: #ececec;
-    border: 3px solid #b5b5b5;
-    box-shadow: 0px 0px 12px rgba(0,0,0,0.4);
-    border-radius: 6px;
-    overflow: hidden;
+.wmp-titlebar {
+  background: linear-gradient(180deg, #3a6ea5 0%, #2a4f7a 100%);
+  color: white;
+  padding: 6px 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid #1f3b5c;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
 }
 
-/* ================================
-   TITLE BAR (Retro Windows)
-================================ */
-
-.title-bar {
-    background: linear-gradient(#1a4ba3, #0f2f6d);
-    color: white;
-    padding: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
+.wmp-icon {
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, #fff 0%, #d0e0ff 60%, #7aa2d9 100%);
+  border-radius: 3px;
+  box-shadow: inset 0 0 2px rgba(0,0,0,0.4);
 }
 
-.window-buttons button {
-    background: #dcdcdc;
-    border: 1px solid #888;
-    width: 22px;
-    height: 22px;
-    margin-left: 4px;
-    cursor: pointer;
-    font-weight: bold;
+/* ============================
+   Display Area (Visualizer Window)
+   ============================ */
+
+.wmp-display {
+  background: #000;
+  border: 2px solid #4a5a7a;
+  margin: 10px;
+  height: 180px;
+  box-shadow:
+    inset 0 0 10px rgba(0,255,255,0.4),
+    inset 0 0 20px rgba(0,255,255,0.2);
 }
 
-.window-buttons button:hover {
-    background: #f0f0f0;
+#visualizer {
+  width: 100%;
+  height: 100%;
 }
 
-/* ================================
-   CONTROLS
-================================ */
+/* ============================
+   Track Info
+   ============================ */
 
-.controls {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    padding: 15px;
+.wmp-track-info {
+  padding: 8px 12px;
+  background: #eef3ff;
+  border-top: 1px solid #b5c2d8;
+  border-bottom: 1px solid #b5c2d8;
+  font-size: 13px;
 }
 
-.controls button {
-    background: #dcdcdc;
-    border: 2px solid #999;
-    padding: 10px 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px;
+#track-title {
+  font-weight: bold;
+  color: #2a4f7a;
 }
 
-.controls button:hover {
-    background: #f7f7f7;
+#track-artist {
+  color: #4a5a7a;
+  font-size: 12px;
 }
 
-/* ================================
-   PROGRESS BAR
-================================ */
+/* ============================
+   Controls
+   ============================ */
 
-.progress-container {
-    padding: 10px 20px;
+.wmp-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 0;
 }
 
-#progress-bar {
-    width: 100%;
+.wmp-btn {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #6a7a99;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #ffffff 0%, #dfe7f2 100%);
+  box-shadow:
+    inset 0 0 3px #ffffff,
+    inset 0 0 6px rgba(255,255,255,0.6),
+    0 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
 }
 
-/* =================
+.wmp-btn:hover {
+  background: linear-gradient(180deg, #f0f6ff 0%, #cdd8ea 100%);
+}
+
+/* ============================
+   Seek Bar
+   ============================ */
+
+.wmp-seek {
+  padding: 10px;
+}
+
+#seek-bar {
+  width: 100%;
+  accent-color: #3a6ea5;
+}
+
+/* ============================
+   Volume
+   ============================ */
+
+.wmp-volume {
+  padding: 10px;
+}
+
+#volume-bar {
+  width: 100%;
+  accent-color: #3a6ea5;
+}
+
+/* ============================
+   Status Bar
+   ============================ */
+
+.wmp-status {
+  background: linear-gradient(180deg, #cdd8ea 0%, #b8c4d6 100%);
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #2a4f7a;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #6a7a99;
+}
