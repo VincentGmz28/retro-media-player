@@ -93,29 +93,31 @@ body {
   box-shadow: inset 0 0 20px #ffb6e6;
 }
 /* ✨ Barbie Glitter Animation Overlay ✨ */
-.wmp-frame {
+body {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
-.wmp-frame::after {
+body::before {
   content: "";
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
 
-  background-image: url("https://i.imgur.com/5qVYQfC.png"); /* glitter texture */
-  background-size: cover;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, transparent 60%);
+  background-size: 6px 6px;
+  animation: barbieSparkleFloat 12s linear infinite;
   opacity: 0.35;
-
-  animation: barbieSparkle 3s linear infinite;
 }
 
-@keyframes barbieSparkle {
-  0% { opacity: 0.25; }
-  50% { opacity: 0.45; }
-  100% { opacity: 0.25; }
+@keyframes barbieSparkleFloat {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 300px -300px;
+  }
 }
