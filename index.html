@@ -26,62 +26,52 @@
       </aside>
 
       <main id="main-content">
+
+        <!-- Retro WMP Player -->
         <section id="media-player">
-          <div id="player-ui">
+          <div class="wmp-frame">
+
+            <div class="wmp-titlebar">
+              <span class="wmp-icon"></span>
+              <span class="wmp-title">Now Playing</span>
+            </div>
+
+            <div class="wmp-display">
+              <canvas id="visualizer"></canvas>
+            </div>
+
+            <div class="wmp-track-info">
+              <span id="track-title">Track Title</span>
+              <span id="track-artist">Artist</span>
+            </div>
+
+            <div class="wmp-controls">
+              <button id="prev-btn" class="wmp-btn"></button>
+              <button id="play-btn" class="wmp-btn"></button>
+              <button id="pause-btn" class="wmp-btn"></button>
+              <button id="next-btn" class="wmp-btn"></button>
+              <button id="stop-btn" class="wmp-btn"></button>
+            </div>
+
+            <div class="wmp-seek">
+              <input type="range" id="seek-bar" min="0" max="100" value="0">
+            </div>
+
+            <div class="wmp-volume">
+              <input type="range" id="volume-bar" min="0" max="1" step="0.01">
+            </div>
+
+            <div class="wmp-status">
+              <span id="current-time">0:00</span>
+              <span id="duration">0:00</span>
+            </div>
+
           </div>
         </section>
-        <section id="visualizer-section">
-          <canvas id="visualizer"></canvas>
-        </section>
-<section id="media-player">
-  <div class="wmp-frame">
 
-    <!-- Title Bar -->
-    <div class="wmp-titlebar">
-      <span class="wmp-icon"></span>
-      <span class="wmp-title">Now Playing</span>
-    </div>
-
-    <!-- Display Area -->
-    <div class="wmp-display">
-      <canvas id="visualizer"></canvas>
-    </div>
-
-    <!-- Track Info -->
-    <div class="wmp-track-info">
-      <span id="track-title">Track Title</span>
-      <span id="track-artist">Artist</span>
-    </div>
-
-    <!-- Controls -->
-    <div class="wmp-controls">
-      <button id="prev-btn" class="wmp-btn"></button>
-      <button id="play-btn" class="wmp-btn"></button>
-      <button id="pause-btn" class="wmp-btn"></button>
-      <button id="next-btn" class="wmp-btn"></button>
-      <button id="stop-btn" class="wmp-btn"></button>
-    </div>
-
-    <!-- Seek Bar -->
-    <div class="wmp-seek">
-      <input type="range" id="seek-bar" min="0" max="100" value="0">
-    </div>
-
-    <!-- Volume -->
-    <div class="wmp-volume">
-      <input type="range" id="volume-bar" min="0" max="1" step="0.01">
-    </div>
-
-    <!-- Status Bar -->
-    <div class="wmp-status">
-      <span id="current-time">0:00</span>
-      <span id="duration">0:00</span>
-    </div>
-
-  </div>
-</section>
       </main>
     </div>
+
     <footer id="footer">
       <p>© 2026 Vinny’s Retro Media Space</p>
     </footer>
