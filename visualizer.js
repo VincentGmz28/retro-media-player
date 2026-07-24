@@ -1,80 +1,48 @@
-// -----------------------------
-// VISUALIZER SETUP
-// -----------------------------
-
-let audioContext;
-let analyser;
-let dataArray;
-let bufferLength;
-let animationId;
-
-// Canvas
-const canvas = document.getElementById("visualizerCanvas");
+const audioPlayer = document.getElementById("audio-player");
+const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
 
-// Resize canvas for crisp rendering
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 
-// -----------------------------
-// START VISUALIZER (called from Play button)
-// -----------------------------
-function startVisualizer() {
-    // Create audio context ONLY after user gesture (Safari requirement)
-    if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const analyser = audioCtx.createAnalyser();
+analyser.fftSize = 256;
 
-    // Connect audio element to analyser
-    const source = audioContext.createMediaElementSource(audioPlayer);
+const source = audioCtx.createMediaElementSource(audioPlayer);
+source.connect(analyser);
+analyser.connect(audioCtx.destination);
 
-    analyser = audioContext.createAnalyser();
-    analyser.fftSize = 256;
-
-    bufferLength = analyser.frequencyBinCount;
-    dataArray = new Uint8Array(bufferLength);
-
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
-
-    drawVisualizer();
-}
-
-// -----------------------------
-// STOP VISUALIZER
-// -----------------------------
-function stopVisualizer() {
-    cancelAnimationFrame(animationId);
-
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-// -----------------------------
-// DRAW LOOP
-// -----------------------------
 function drawVisualizer() {
-    animationId = requestAnimationFrame(drawVisualizer);
+  requestAnimationFrame(drawVisualizer);
 
-    analyser.getByteFrequencyData(dataArray);
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+  analyser.getByteFrequencyData(dataArray);
 
-    ctx.fillStyle = "#000";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const barWidth = (canvas.width / bufferLength) * 1.5;
-    let x = 0;
+  const barWidth = (canvas.width / bufferLength) * 1.5;
+  let x = 0;
 
-    for (let i = 0; i < bufferLength; i++) {
-        const barHeight = dataArray[i];
+  for (let i = 0; i < bufferLength; i++) {
+    const barHeight = dataArray[i] * 0.8;
 
-        // Neon retro color
-        const r = barHeight + 25;
-        const g = 50;
-        const b = 200;
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, "#6a7a99");
+    gradient.addColorStop(1, "#3a4b6b");
 
-        ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+    ctx.fillStyle = gradient;
+    ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
 
-        x += barWidth + 1;
-    }
+    x += barWidth + 1;
+  }
 }
+
+audioPlayer.onplay = () => {
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+  drawVisualizer();
+};
