@@ -1,62 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Media Player</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
 <body>
+  <div id="page-wrapper">
 
-    <!-- 🟦 MAIN PLAYER WINDOW -->
-    <div class="player-window">
+    <header id="profile-header">
+      <h1>Vinny’s Retro Media Space</h1>
+      <p class="tagline">music • art • tech • nostalgia</p>
+    </header>
 
-        <!-- 🟦 RETRO TITLE BAR -->
-        <div class="title-bar">
-            <span>Windows Media Player</span>
-            <div class="window-buttons">
-                <button class="minimize">—</button>
-                <button class="maximize">□</button>
-                <button class="close">X</button>
-            </div>
+    <div id="layout">
+      <aside id="sidebar">
+        <div class="profile-pic"></div>
+
+        <div class="about-box">
+          <h2>About Me</h2>
+          <p>Cloud student • Artist • Tech explorer</p>
         </div>
 
-        <!-- 🟦 AUDIO ELEMENT -->
-        <audio id="audio-player" src=""></audio>
-
-        <!-- 🟦 CONTROLS -->
-        <div class="controls">
-            <button id="play-btn">▶</button>
-            <button id="pause-btn">⏸</button>
-            <button id="stop-btn">⏹</button>
+        <div class="links-box">
+          <h2>Top Friends</h2>
+          <ul>
+            <li>Music</li>
+            <li>Art</li>
+            <li>Tech</li>
+          </ul>
         </div>
+      </aside>
 
-        <!-- 🟦 PROGRESS BAR -->
-        <div class="progress-container">
-            <input type="range" id="progress-bar" value="0" min="0" max="100">
-        </div>
+      <main id="main-content">
+        <section id="media-player">
+          <div id="player-ui">
+          </div>
+        </section>
+        <section id="visualizer-section">
+          <canvas id="visualizer"></canvas>
+        </section>
 
-        <!-- 🟦 VOLUME -->
-        <div class="volume-container">
-            <label>Volume</label>
-            <input type="range" id="volume-slider" min="0" max="1" step="0.01">
-        </div>
-
-        <!-- 🟦 FILE LOADER -->
-        <div class="file-loader">
-            <input type="file" id="file-input" accept="audio/*">
-        </div>
-
-        <!-- 🟦 THEME SWITCHER (we will activate this later) -->
-        <div class="theme-switcher">
-            <button id="theme-toggle">Switch Theme</button>
-        </div>
-
+      </main>
     </div>
+    <footer id="footer">
+      <p>© 2026 Vinny’s Retro Media Space</p>
+    </footer>
 
-    <script src="script.js"></script>
-    <script src="visualizer.js"></script>
-
+  </div>
 </body>
-</html>
