@@ -8,37 +8,30 @@ body {
   color: #ff1493;
 }
 
+/* Frame */
 .wmp-frame {
   background: #fff0fa;
   border: 3px solid #ff4db8;
-  border-radius: 12px;
   box-shadow:
     0 0 20px #ff4db8,
     inset 0 0 20px #ffb6e6;
-  /* DO NOT change width or padding */
 }
 
 /* Title Bar */
 .wmp-titlebar {
   background: linear-gradient(90deg, #ff4db8, #ff1493);
   color: white;
-  padding: 10px;
-  font-size: inherit;
   border-bottom: 3px solid #ff1493;
   text-shadow: 0 0 6px white;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .wmp-icon {
-  width: 18px;
-  height: 18px;
   background: #fff;
   border-radius: 50%;
   box-shadow: 0 0 10px #ff1493;
 }
 
+/* Display */
 .wmp-display {
   background: #fff;
   border: 3px solid #ff4db8;
@@ -56,22 +49,13 @@ body {
   text-shadow: 0 0 4px #ffb6e6;
 }
 
-/* Controls — keep original size */
-.wmp-controls {
-  display: flex;
-  justify-content: center;
-  gap: inherit;
-}
-
+/* Controls */
 .wmp-btn {
   border: 2px solid #ff4db8;
-  border-radius: 10px;
   background: linear-gradient(180deg, #fff, #ffe6f7);
   box-shadow:
     0 0 10px #ff4db8,
     inset 0 0 10px #ffb6e6;
-  cursor: pointer;
-  transition: 0.2s ease;
 }
 
 .wmp-btn:hover {
