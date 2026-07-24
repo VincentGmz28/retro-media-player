@@ -1,59 +1,116 @@
-// Get elements
-const audioPlayer = document.getElementById("audioPlayer");
-const playBtn = document.getElementById("playBtn");
-const pauseBtn = document.getElementById("pauseBtn");
-const stopBtn = document.getElementById("stopBtn");
-const fileInput = document.getElementById("fileInput");
-const volumeSlider = document.getElementById("volumeSlider");
+// ===============================
+// RETRO MEDIA PLAYER FEATURE ENGINE
+// ===============================
 
-// -----------------------------
-// FILE UPLOAD (iPhone‑safe)
-// -----------------------------
-fileInput.addEventListener("change", function () {
-    const file = this.files[0];
-    if (!file) return;
+// Grab elements
+const audio = document.getElementById("audio-player");
+const seekBar = document.getElementById("seek-bar");
+const volumeBar = document.getElementById("volume-bar");
+const currentTimeDisplay = document.getElementById("current-time");
+const durationDisplay = document.getElementById("duration");
+const trackTitle = document.getElementById("track-title");
+const trackArtist = document.getElementById("track-artist");
 
-    const url = URL.createObjectURL(file);
-    audioPlayer.src = url;
+// ===============================
+// PLAYLIST SYSTEM
+// ===============================
 
-    // Required for Safari/iPhone
-    audioPlayer.load();
+// Add your songs here (root-level files)
+const playlist = [
+  {
+    title: "Lose Yourself to Dance",
+    artist: "Daft Punk",
+    file: "Daft Punk - Lose Yourself to Dance (Official Version).mp3"
+  }
+];
+
+let currentTrack = 0;
+
+// Load track
+function loadTrack(index) {
+  currentTrack = index;
+  const track = playlist[currentTrack];
+
+  audio.src = track.file;
+  trackTitle.textContent = track.title;
+  trackArtist.textContent = track.artist;
+
+  audio.play();
+}
+
+loadTrack(0); // Load first track on page load
+
+// ===============================
+// PLAYER BUTTONS
+// ===============================
+
+document.getElementById("play-btn").onclick = () => audio.play();
+document.getElementById("pause-btn").onclick = () => audio.pause();
+
+document.getElementById("stop-btn").onclick = () => {
+  audio.pause();
+  audio.currentTime = 0;
+};
+
+// Next track
+document.getElementById("next-btn").onclick = () => {
+  currentTrack = (currentTrack + 1) % playlist.length;
+  loadTrack(currentTrack);
+};
+
+// Previous track
+document.getElementById("prev-btn").onclick = () => {
+  currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+  loadTrack(currentTrack);
+};
+
+// Repeat toggle
+let repeatEnabled = false;
+document.getElementById("repeat-btn").onclick = () => {
+  repeatEnabled = !repeatEnabled;
+  audio.loop = repeatEnabled;
+};
+
+// Auto-advance when song ends
+audio.onended = () => {
+  if (!repeatEnabled) {
+    currentTrack = (currentTrack + 1) % playlist.length;
+    loadTrack(currentTrack);
+  }
+};
+
+// ===============================
+// SEEK BAR + TIME DISPLAY
+// ===============================
+
+audio.addEventListener("timeupdate", () => {
+  if (audio.duration) {
+    seekBar.value = (audio.currentTime / audio.duration) * 100;
+    currentTimeDisplay.textContent = formatTime(audio.currentTime);
+    durationDisplay.textContent = formatTime(audio.duration);
+  }
 });
 
-// -----------------------------
-// PLAY BUTTON (Safari unlocks audio ONLY after user gesture)
-// -----------------------------
-playBtn.addEventListener("click", () => {
-    audioPlayer.play();
-
-    // Start visualizer ONLY after user gesture
-    if (typeof startVisualizer === "function") {
-        startVisualizer();
-    }
+seekBar.addEventListener("input", () => {
+  const newTime = (seekBar.value / 100) * audio.duration;
+  audio.currentTime = newTime;
 });
 
-// -----------------------------
-// PAUSE BUTTON
-// -----------------------------
-pauseBtn.addEventListener("click", () => {
-    audioPlayer.pause();
+// ===============================
+// VOLUME CONTROL
+// ===============================
+
+volumeBar.addEventListener("input", () => {
+  audio.volume = volumeBar.value;
 });
 
-// -----------------------------
-// STOP BUTTON (also stops visualizer)
-// -----------------------------
-stopBtn.addEventListener("click", () => {
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
+// ===============================
+// TIME FORMATTER
+// ===============================
 
-    if (typeof stopVisualizer === "function") {
-        stopVisualizer();
-    }
-});
-
-// -----------------------------
-// VOLUME SLIDER (Safari requires "input" event)
-// -----------------------------
-volumeSlider.addEventListener("input", () => {
-    audioPlayer.volume = volumeSlider.value;
-});
+function formatTime(seconds) {
+  if (isNaN(seconds)) return "0:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs.toString().padStart(2, "0")}`;
+}
