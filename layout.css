@@ -1,0 +1,70 @@
+/* ============================================
+   BASE LAYOUT — Shared by ALL Themes
+   ============================================ */
+
+/* Frame */
+.wmp-frame {
+  width: 480px;
+  padding: 0;
+  margin: 0;
+  border-radius: 6px;
+}
+
+/* Title Bar */
+.wmp-titlebar {
+  padding: 10px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wmp-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Display */
+.wmp-display {
+  height: 180px;
+  margin: 12px;
+}
+
+/* Track Info */
+.wmp-track-info {
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+/* Controls */
+.wmp-controls {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px 0;
+}
+
+.wmp-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+}
+
+/* Seek + Volume */
+.wmp-seek,
+.wmp-volume {
+  padding: 12px;
+}
+
+#seek-bar,
+#volume-bar {
+  width: 100%;
+}
+
+/* Status Bar */
+.wmp-status {
+  padding: 8px 14px;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+}
