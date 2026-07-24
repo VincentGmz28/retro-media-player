@@ -1,6 +1,4 @@
-/* ============================================
-   BARBIE THEME — Pink Glitter Dreamhouse Skin
-   ============================================ */
+/* BARBIE — Pink Glitter Dreamhouse Skin */
 
 body {
   background: linear-gradient(180deg, #ffe6f7, #ffb6e6);
@@ -11,7 +9,7 @@ body {
 /* Frame */
 .wmp-frame {
   background: #fff0fa;
-  border: 3px solid #ff4db8;
+  border: 2px solid #ff4db8;
   box-shadow:
     0 0 20px #ff4db8,
     inset 0 0 20px #ffb6e6;
@@ -21,7 +19,7 @@ body {
 .wmp-titlebar {
   background: linear-gradient(90deg, #ff4db8, #ff1493);
   color: white;
-  border-bottom: 3px solid #ff1493;
+  border-bottom: 2px solid #ff1493;
   text-shadow: 0 0 6px white;
 }
 
@@ -34,7 +32,7 @@ body {
 /* Display */
 .wmp-display {
   background: #fff;
-  border: 3px solid #ff4db8;
+  border: 2px solid #ff4db8;
   box-shadow:
     inset 0 0 25px #ffb6e6,
     0 0 20px #ff4db8;
@@ -80,7 +78,7 @@ body {
   text-shadow: 0 0 4px #ffb6e6;
 }
 
-/* Sidebar + Layout */
+/* Sidebar */
 #sidebar,
 #profile-header,
 #footer {
