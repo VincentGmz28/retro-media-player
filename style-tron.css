@@ -1,6 +1,4 @@
-/* =========================================
-   TRON THEME — Neon Blue Cyber Skin
-   ========================================= */
+/* TRON — Neon Blue Cyber Skin */
 
 body {
   background: radial-gradient(circle at center, #0a0f1f 0%, #000 70%);
@@ -8,11 +6,10 @@ body {
   font-family: "Orbitron", Tahoma, sans-serif;
 }
 
-/* WMP Frame — keep original size */
+/* Frame */
 .wmp-frame {
   background: rgba(0, 0, 0, 0.7);
   border: 2px solid #00eaff;
-  border-radius: 10px;
   box-shadow:
     0 0 20px #00eaff,
     inset 0 0 20px rgba(0, 255, 255, 0.3);
@@ -22,35 +19,23 @@ body {
 .wmp-titlebar {
   background: linear-gradient(90deg, #00111a, #003344);
   color: #00eaff;
-  padding: 10px;
-  font-size: inherit; /* keep original size */
-  letter-spacing: 1px;
   border-bottom: 2px solid #00eaff;
   text-shadow: 0 0 8px #00eaff;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .wmp-icon {
-  width: 18px;
-  height: 18px;
   background: #00eaff;
   border-radius: 3px;
   box-shadow: 0 0 10px #00eaff;
 }
 
+/* Display */
 .wmp-display {
   background: #000;
   border: 2px solid #00eaff;
   box-shadow:
     inset 0 0 25px #00eaff,
     0 0 20px #00eaff;
-}
-
-#visualizer {
-  width: 100%;
-  height: 100%;
 }
 
 /* Track Info */
@@ -62,22 +47,13 @@ body {
   text-shadow: 0 0 6px #00eaff;
 }
 
-/* Controls — keep original size */
-.wmp-controls {
-  display: flex;
-  justify-content: center;
-  gap: inherit; /* keep spacing */
-}
-
+/* Controls */
 .wmp-btn {
   border: 2px solid #00eaff;
-  border-radius: 6px;
   background: rgba(0, 0, 0, 0.6);
   box-shadow:
     0 0 10px #00eaff,
     inset 0 0 10px #00eaff;
-  cursor: pointer;
-  transition: 0.2s ease;
 }
 
 .wmp-btn:hover {
@@ -102,13 +78,13 @@ body {
   text-shadow: 0 0 6px #00eaff;
 }
 
-/* Sidebar + Layout */
+/* Sidebar */
 #sidebar,
 #profile-header,
 #footer {
   border: 2px solid #00eaff;
-  box-shadow: 0 0 15px #00eaff;
   background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px #00eaff;
 }
 
 .profile-pic {
