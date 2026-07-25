@@ -15,7 +15,6 @@ const trackArtist = document.getElementById("track-artist");
 // PLAYLIST SYSTEM
 // ===============================
 
-// Add your songs here (root-level files)
 const playlist = [
   {
     title: "Lose Yourself to Dance",
@@ -26,7 +25,6 @@ const playlist = [
 
 let currentTrack = 0;
 
-// Load track
 function loadTrack(index) {
   currentTrack = index;
   const track = playlist[currentTrack];
@@ -38,7 +36,7 @@ function loadTrack(index) {
   audio.play();
 }
 
-loadTrack(0); // Load first track on page load
+loadTrack(0);
 
 // ===============================
 // PLAYER BUTTONS
@@ -52,26 +50,22 @@ document.getElementById("stop-btn").onclick = () => {
   audio.currentTime = 0;
 };
 
-// Next track
 document.getElementById("next-btn").onclick = () => {
   currentTrack = (currentTrack + 1) % playlist.length;
   loadTrack(currentTrack);
 };
 
-// Previous track
 document.getElementById("prev-btn").onclick = () => {
   currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
   loadTrack(currentTrack);
 };
 
-// Repeat toggle
 let repeatEnabled = false;
 document.getElementById("repeat-btn").onclick = () => {
   repeatEnabled = !repeatEnabled;
   audio.loop = repeatEnabled;
 };
 
-// Auto-advance when song ends
 audio.onended = () => {
   if (!repeatEnabled) {
     currentTrack = (currentTrack + 1) % playlist.length;
@@ -114,18 +108,16 @@ function formatTime(seconds) {
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
+
 // ===============================
 // RETRO 2000s WAVE VISUALIZER
 // ===============================
 
-// Grab the audio element you already have
-const audioElement = document.getElementById("audio");
+const audioElement = audio;
 
-// Create the canvas AFTER you add it to HTML
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
 
-// Resize canvas to match player width
 function resizeCanvas() {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
@@ -133,18 +125,15 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
-// Create AudioContext + Analyser
 let audioCtx;
 let analyser;
 let source;
 
-// Initialize visualizer when audio starts
 function initVisualizer() {
     if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioCtx.createAnalyser();
 
-        // Retro wave settings
         analyser.fftSize = 2048;
         analyser.smoothingTimeConstant = 0.85;
 
@@ -154,7 +143,6 @@ function initVisualizer() {
     }
 }
 
-// Animation loop
 function drawWave() {
     requestAnimationFrame(drawWave);
 
@@ -166,9 +154,8 @@ function drawWave() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Retro neon glow
     ctx.lineWidth = 2;
-    ctx.strokeStyle = "#00eaff"; // cyan glow
+    ctx.strokeStyle = "#00eaff";
     ctx.shadowBlur = 15;
     ctx.shadowColor = "#00eaff";
 
@@ -178,13 +165,13 @@ function drawWave() {
     let x = 0;
 
     for (let i = 0; i < bufferLength; i++) {
-        const v = dataArray[i] / 128.0; // normalize
+        const v = dataArray[i] / 128.0;
         const y = (v * canvas.height) / 2;
 
         if (i === 0) {
             ctx.moveTo(x, y);
         } else {
-            ctx.quadraticCurveTo(x - sliceWidth, y, x, y); // smooth retro curve
+            ctx.quadraticCurveTo(x - sliceWidth, y, x, y);
         }
 
         x += sliceWidth;
@@ -193,13 +180,11 @@ function drawWave() {
     ctx.stroke();
 }
 
-// Hook into your existing play button
 audioElement.addEventListener("play", () => {
     initVisualizer();
     drawWave();
 });
 
-// Also resume AudioContext if paused
 audioElement.addEventListener("pause", () => {
     if (audioCtx && audioCtx.state === "running") {
         audioCtx.suspend();
