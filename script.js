@@ -146,8 +146,14 @@ function initVisualizer() {
 // ⭐ MODE SYSTEM
 let mode = "wave";
 
-document.getElementById("visualizer-mode").addEventListener("change", (e) => {
-  mode = e.target.value;
+// ⭐ FIX ADDED — GUARANTEES DROPDOWN WORKS
+document.addEventListener("DOMContentLoaded", () => {
+  const modeSelector = document.getElementById("visualizer-mode");
+  if (modeSelector) {
+    modeSelector.addEventListener("change", (e) => {
+      mode = e.target.value;
+    });
+  }
 });
 
 // ===============================
