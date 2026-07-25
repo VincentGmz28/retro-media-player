@@ -110,7 +110,7 @@ function formatTime(seconds) {
 }
 
 // ===============================
-// RETRO 2000s WAVE VISUALIZER
+// VISUALIZER ENGINE
 // ===============================
 
 const audioElement = audio;
@@ -143,9 +143,18 @@ function initVisualizer() {
     }
 }
 
-function drawWave() {
-    requestAnimationFrame(drawWave);
+// ⭐ MODE SYSTEM
+let mode = "wave";
 
+document.getElementById("visualizer-mode").addEventListener("change", (e) => {
+  mode = e.target.value;
+});
+
+// ===============================
+// VISUALIZER #1 — WAVEFORM
+// ===============================
+
+function drawWave() {
     if (!analyser) return;
 
     const bufferLength = analyser.fftSize;
@@ -180,9 +189,99 @@ function drawWave() {
     ctx.stroke();
 }
 
+// ===============================
+// VISUALIZER #2 — BARS
+// ===============================
+
+function drawBars() {
+    if (!analyser) return;
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    analyser.getByteFrequencyData(dataArray);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const barWidth = (canvas.width / bufferLength) * 2.5;
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+        const barHeight = dataArray[i];
+
+        ctx.fillStyle = "#00ff88";
+        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+
+        x += barWidth + 1;
+    }
+}
+
+// ===============================
+// VISUALIZER #3 — CIRCLE
+// ===============================
+
+function drawCircle() {
+    if (!analyser) return;
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    analyser.getByteFrequencyData(dataArray);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const radius = 40 + dataArray[10] / 2;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = "#ff1493";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+}
+
+// ===============================
+// VISUALIZER #4 — DOTS
+// ===============================
+
+function drawDots() {
+    if (!analyser) return;
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    analyser.getByteFrequencyData(dataArray);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const spacing = canvas.width / bufferLength;
+
+    for (let i = 0; i < bufferLength; i += 5) {
+        const value = dataArray[i];
+        const percent = value / 255;
+        const y = canvas.height - canvas.height * percent;
+
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(i * spacing, y, 3, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+// ===============================
+// UNIFIED ANIMATION LOOP
+// ===============================
+
+function animate() {
+    requestAnimationFrame(animate);
+
+    if (mode === "wave") drawWave();
+    if (mode === "bars") drawBars();
+    if (mode === "circle") drawCircle();
+    if (mode === "dots") drawDots();
+}
+
 audioElement.addEventListener("play", () => {
     initVisualizer();
-    drawWave();
+    animate();
 });
 
 audioElement.addEventListener("pause", () => {
