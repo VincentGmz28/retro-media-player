@@ -176,7 +176,7 @@ function applyMotionBlur() {
 }
 
 // ===============================
-// VISUALIZER #1 — WAVEFORM (unchanged)
+// VISUALIZER #1 — WAVEFORM (⭐ FIXED CENTERING)
 // ===============================
 
 function drawWave() {
@@ -198,9 +198,15 @@ function drawWave() {
     const sliceWidth = canvas.width / bufferLength;
     let x = 0;
 
+    // ⭐ FIX — center waveform properly
+    const centerY = canvas.height / 2;
+    const amplitude = canvas.height * 0.25;
+
     for (let i = 0; i < bufferLength; i++) {
         const v = dataArray[i] / 128.0;
-        const y = (v * canvas.height) / 2;
+
+        // ⭐ FIXED LINE — centers the waveform
+        const y = centerY + (v - 1) * amplitude;
 
         if (i === 0) {
             ctx.moveTo(x, y);
@@ -241,7 +247,7 @@ function drawBars() {
 }
 
 // ===============================
-// VISUALIZER #3 — RADIAL BURST (color cycling + blur + spin)
+// VISUALIZER #3 — RADIAL BURST (unchanged)
 // ===============================
 
 function drawRadialBurst() {
@@ -286,7 +292,7 @@ function drawRadialBurst() {
 }
 
 // ===============================
-// VISUALIZER #4 — ENERGY ORB (color cycling + blur + pulse)
+// VISUALIZER #4 — ENERGY ORB (unchanged)
 // ===============================
 
 function drawEnergyOrb() {
