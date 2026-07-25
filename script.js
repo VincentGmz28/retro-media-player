@@ -157,7 +157,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===============================
-// VISUALIZER #1 — WAVEFORM
+// COLOR CYCLING ENGINE
+// ===============================
+
+let hue = 0;
+function nextColor() {
+  hue = (hue + 0.5) % 360;
+  return `hsl(${hue}, 100%, 60%)`;
+}
+
+// ===============================
+// MOTION BLUR TRAIL
+// ===============================
+
+function applyMotionBlur() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+// ===============================
+// VISUALIZER #1 — WAVEFORM (unchanged)
 // ===============================
 
 function drawWave() {
@@ -167,12 +186,12 @@ function drawWave() {
     const dataArray = new Uint8Array(bufferLength);
     analyser.getByteTimeDomainData(dataArray);
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    applyMotionBlur();
 
     ctx.lineWidth = 2;
-    ctx.strokeStyle = "#00eaff";
+    ctx.strokeStyle = nextColor();
     ctx.shadowBlur = 15;
-    ctx.shadowColor = "#00eaff";
+    ctx.shadowColor = ctx.strokeStyle;
 
     ctx.beginPath();
 
@@ -196,7 +215,7 @@ function drawWave() {
 }
 
 // ===============================
-// VISUALIZER #2 — BARS
+// VISUALIZER #2 — BARS (unchanged)
 // ===============================
 
 function drawBars() {
@@ -206,7 +225,7 @@ function drawBars() {
     const dataArray = new Uint8Array(bufferLength);
     analyser.getByteFrequencyData(dataArray);
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    applyMotionBlur();
 
     const barWidth = (canvas.width / bufferLength) * 2.5;
     let x = 0;
@@ -214,7 +233,7 @@ function drawBars() {
     for (let i = 0; i < bufferLength; i++) {
         const barHeight = dataArray[i];
 
-        ctx.fillStyle = "#00ff88";
+        ctx.fillStyle = nextColor();
         ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
 
         x += barWidth + 1;
@@ -222,7 +241,7 @@ function drawBars() {
 }
 
 // ===============================
-// VISUALIZER #3 — RADIAL BURST (WMP Glow)
+// VISUALIZER #3 — RADIAL BURST (color cycling + blur + spin)
 // ===============================
 
 function drawRadialBurst() {
@@ -232,34 +251,42 @@ function drawRadialBurst() {
     const dataArray = new Uint8Array(bufferLength);
     analyser.getByteFrequencyData(dataArray);
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    applyMotionBlur();
 
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
 
+    ctx.save();
+    ctx.translate(centerX, centerY);
+
+    const spin = Date.now() / 3000;
+    ctx.rotate(spin);
+
     ctx.shadowBlur = 20;
-    ctx.shadowColor = "#00eaff";
+    ctx.shadowColor = nextColor();
 
     for (let i = 0; i < bufferLength; i += 8) {
         const value = dataArray[i];
         const angle = (i / bufferLength) * Math.PI * 2;
         const length = value * 1.2;
 
-        const x = centerX + Math.cos(angle) * length;
-        const y = centerY + Math.sin(angle) * length;
+        const x = Math.cos(angle) * length;
+        const y = Math.sin(angle) * length;
 
-        ctx.strokeStyle = "rgba(0, 234, 255, 0.9)";
+        ctx.strokeStyle = nextColor();
         ctx.lineWidth = 2;
 
         ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
+        ctx.moveTo(0, 0);
         ctx.lineTo(x, y);
         ctx.stroke();
     }
+
+    ctx.restore();
 }
 
 // ===============================
-// VISUALIZER #4 — ENERGY ORB (WMP Glow + Pulse)
+// VISUALIZER #4 — ENERGY ORB (color cycling + blur + pulse)
 // ===============================
 
 function drawEnergyOrb() {
@@ -269,7 +296,7 @@ function drawEnergyOrb() {
     const dataArray = new Uint8Array(bufferLength);
     analyser.getByteFrequencyData(dataArray);
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    applyMotionBlur();
 
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
@@ -281,19 +308,19 @@ function drawEnergyOrb() {
     const radius = 40 + bass * 60 + wobble;
 
     ctx.shadowBlur = 30;
-    ctx.shadowColor = "#00eaff";
+    ctx.shadowColor = nextColor();
 
     // Outer glow ring
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius + treble * 40, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(0, 234, 255, 0.4)";
+    ctx.strokeStyle = nextColor();
     ctx.lineWidth = 10;
     ctx.stroke();
 
     // Core orb
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(0, 234, 255, 0.8)";
+    ctx.fillStyle = nextColor();
     ctx.fill();
 }
 
@@ -325,4 +352,4 @@ audioElement.addEventListener("play", () => {
     if (audioCtx && audioCtx.state === "suspended") {
         audioCtx.resume();
     }
-});l
+});
