@@ -155,5 +155,4 @@ function draw() {
   requestAnimationFrame(draw);
   currentMode();
 }
-
 draw();
