@@ -74,11 +74,10 @@
     inset 0 0 20px #000,
     0 0 6px rgba(0,0,0,0.3);
 
-  /* ⭐ FIX — gives visualizer full height */
   height: 320px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  /* ⭐ FIX — remove flex centering */
+  display: block;
 
   margin: 10px 0;
 }
