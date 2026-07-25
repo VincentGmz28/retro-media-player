@@ -146,7 +146,7 @@ function initVisualizer() {
 // ⭐ MODE SYSTEM
 let mode = "wave";
 
-// ⭐ FIX ADDED — GUARANTEES DROPDOWN WORKS
+// ⭐ FIX — ensures dropdown works
 document.addEventListener("DOMContentLoaded", () => {
   const modeSelector = document.getElementById("visualizer-mode");
   if (modeSelector) {
@@ -222,10 +222,10 @@ function drawBars() {
 }
 
 // ===============================
-// VISUALIZER #3 — CIRCLE
+// VISUALIZER #3 — RADIAL BURST (WMP Glow)
 // ===============================
 
-function drawCircle() {
+function drawRadialBurst() {
     if (!analyser) return;
 
     const bufferLength = analyser.frequencyBinCount;
@@ -234,22 +234,35 @@ function drawCircle() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const radius = 40 + dataArray[10] / 2;
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
 
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = "#ff1493";
-    ctx.lineWidth = 4;
-    ctx.stroke();
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = "#00eaff";
+
+    for (let i = 0; i < bufferLength; i += 8) {
+        const value = dataArray[i];
+        const angle = (i / bufferLength) * Math.PI * 2;
+        const length = value * 1.2;
+
+        const x = centerX + Math.cos(angle) * length;
+        const y = centerY + Math.sin(angle) * length;
+
+        ctx.strokeStyle = "rgba(0, 234, 255, 0.9)";
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
 }
 
 // ===============================
-// VISUALIZER #4 — DOTS
+// VISUALIZER #4 — ENERGY ORB (WMP Glow + Pulse)
 // ===============================
 
-function drawDots() {
+function drawEnergyOrb() {
     if (!analyser) return;
 
     const bufferLength = analyser.frequencyBinCount;
@@ -258,18 +271,30 @@ function drawDots() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const spacing = canvas.width / bufferLength;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
 
-    for (let i = 0; i < bufferLength; i += 5) {
-        const value = dataArray[i];
-        const percent = value / 255;
-        const y = canvas.height - canvas.height * percent;
+    const bass = dataArray[1] / 255;
+    const treble = dataArray[bufferLength - 1] / 255;
 
-        ctx.fillStyle = "#ffffff";
-        ctx.beginPath();
-        ctx.arc(i * spacing, y, 3, 0, Math.PI * 2);
-        ctx.fill();
-    }
+    const wobble = Math.sin(Date.now() / 200) * 5;
+    const radius = 40 + bass * 60 + wobble;
+
+    ctx.shadowBlur = 30;
+    ctx.shadowColor = "#00eaff";
+
+    // Outer glow ring
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius + treble * 40, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(0, 234, 255, 0.4)";
+    ctx.lineWidth = 10;
+    ctx.stroke();
+
+    // Core orb
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(0, 234, 255, 0.8)";
+    ctx.fill();
 }
 
 // ===============================
@@ -281,8 +306,8 @@ function animate() {
 
     if (mode === "wave") drawWave();
     if (mode === "bars") drawBars();
-    if (mode === "circle") drawCircle();
-    if (mode === "dots") drawDots();
+    if (mode === "circle") drawRadialBurst();
+    if (mode === "dots") drawEnergyOrb();
 }
 
 audioElement.addEventListener("play", () => {
@@ -300,4 +325,4 @@ audioElement.addEventListener("play", () => {
     if (audioCtx && audioCtx.state === "suspended") {
         audioCtx.resume();
     }
-});
+});l
