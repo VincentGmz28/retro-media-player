@@ -1,109 +1,159 @@
-import { setVisualizerMode } from "./visualizer.js";
-
 // ===============================
-// UNIVERSAL VISUALIZER MODES
-// ===============================
-
-const allModes = [
-  "liquidBars",
-  "oceanWaves",
-  "barsAndWaves",
-  "tronGrid",
-  "barbieSparkle",
-  "discoGrid"
-];
-
-let modeIndex = 0;
-let modeCycleInterval = null;
-
-// Auto-cycle visualizer modes
-function startModeCycle() {
-  clearInterval(modeCycleInterval);
-
-  modeCycleInterval = setInterval(() => {
-    modeIndex = (modeIndex + 1) % allModes.length;
-    setVisualizerMode(allModes[modeIndex]);
-  }, 8000); // 8 seconds per mode
-}
-
-// ===============================
-// THEME SWITCHER (SKINS ONLY)
-// ===============================
-
-function setSkin(file) {
-  document.getElementById("skinStylesheet").href = file + "?v=" + Date.now();
-}
-
-window.setSkin = setSkin;
-
-// ===============================
-// AUDIO CONTROLS
+// VISUALIZER CORE SETUP
 // ===============================
 
 const audio = document.getElementById("audio-player");
-const seekBar = document.getElementById("seek-bar");
-const volumeBar = document.getElementById("volume-bar");
-const currentTimeDisplay = document.getElementById("current-time");
-const durationDisplay = document.getElementById("duration");
+const canvas = document.getElementById("visualizer");
+const ctx = canvas.getContext("2d");
 
-// ⭐ REQUIRED for visualizer to work
-document.getElementById("play-btn").onclick = () => {
-  if (typeof audioCtx !== "undefined") {
-    audioCtx.resume();
+// Resize canvas to fit container
+function resizeCanvas() {
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// Audio context + analyzer
+window.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const analyzer = audioCtx.createAnalyser();
+analyzer.fftSize = 256;
+
+const source = audioCtx.createMediaElementSource(audio);
+source.connect(analyzer);
+analyzer.connect(audioCtx.destination);
+
+// Buffer for frequency data
+const buffer = new Uint8Array(analyzer.frequencyBinCount);
+
+// ===============================
+// VISUALIZER MODES
+// ===============================
+
+function liquidBars() {
+  analyzer.getByteFrequencyData(buffer);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const barWidth = canvas.width / buffer.length;
+  for (let i = 0; i < buffer.length; i++) {
+    const barHeight = buffer[i] * 1.2;
+    ctx.fillStyle = "rgba(0, 200, 255, 0.8)";
+    ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 2, barHeight);
   }
-  audio.play();
-};
-
-document.getElementById("pause-btn").onclick = () => audio.pause();
-
-document.getElementById("stop-btn").onclick = () => {
-  audio.pause();
-  audio.currentTime = 0;
-};
-
-// Repeat
-let repeatEnabled = false;
-document.getElementById("repeat-btn").onclick = () => {
-  repeatEnabled = !repeatEnabled;
-  audio.loop = repeatEnabled;
-};
-
-// ===============================
-// SEEK BAR + TIME DISPLAY
-// ===============================
-
-audio.addEventListener("timeupdate", () => {
-  if (audio.duration) {
-    seekBar.value = (audio.currentTime / audio.duration) * 100;
-    currentTimeDisplay.textContent = formatTime(audio.currentTime);
-    durationDisplay.textContent = formatTime(audio.duration);
-  }
-});
-
-seekBar.addEventListener("input", () => {
-  const newTime = (seekBar.value / 100) * audio.duration;
-  audio.currentTime = newTime;
-});
-
-// ===============================
-// VOLUME CONTROL
-// ===============================
-
-volumeBar.addEventListener("input", () => {
-  audio.volume = volumeBar.value;
-});
-
-// ===============================
-// TIME FORMATTER
-// ===============================
-
-function formatTime(seconds) {
-  if (isNaN(seconds)) return "0:00";
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
-// Start cycling modes immediately
-setVisualizerMode(allModes[0]);
-startModeCycle();
+function oceanWaves() {
+  analyzer.getByteFrequencyData(buffer);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height / 2);
+  for (let i = 0; i < buffer.length; i++) {
+    const x = (i / buffer.length) * canvas.width;
+    const y = canvas.height / 2 - buffer[i] * 0.8;
+    ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = "#00aaff";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+}
+
+function barsAndWaves() {
+  analyzer.getByteFrequencyData(buffer);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const barWidth = canvas.width / buffer.length;
+  for (let i = 0; i < buffer.length; i++) {
+    const barHeight = buffer[i];
+    ctx.fillStyle = "#ffaa00";
+    ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 2, barHeight);
+  }
+
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height / 2);
+  for (let i = 0; i < buffer.length; i++) {
+    const x = (i / buffer.length) * canvas.width;
+    const y = canvas.height / 2 - buffer[i] * 0.5;
+    ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+function tronGrid() {
+  analyzer.getByteFrequencyData(buffer);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.strokeStyle = "#00ffff";
+  ctx.lineWidth = 1;
+
+  for (let i = 0; i < buffer.length; i++) {
+    const x = (i / buffer.length) * canvas.width;
+    const y = canvas.height - buffer[i] * 1.5;
+    ctx.beginPath();
+    ctx.moveTo(x, canvas.height);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  }
+}
+
+function barbieSparkle() {
+  analyzer.getByteFrequencyData(buffer);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < buffer.length; i++) {
+    const size = buffer[i] * 0.4;
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+
+    ctx.fillStyle = "rgba(255, 105, 180, 0.8)";
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function discoGrid() {
+  analyzer.getByteFrequencyData(buffer);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const gridSize = 20;
+  for (let x = 0; x < canvas.width; x += gridSize) {
+    for (let y = 0; y < canvas.height; y += gridSize) {
+      const index = Math.floor((x + y) % buffer.length);
+      const brightness = buffer[index];
+      ctx.fillStyle = `rgba(${brightness}, 0, ${255 - brightness}, 0.9)`;
+      ctx.fillRect(x, y, gridSize, gridSize);
+    }
+  }
+}
+
+// ===============================
+// MODE SWITCHING
+// ===============================
+
+let currentMode = liquidBars;
+
+export function setVisualizerMode(modeName) {
+  const modes = {
+    liquidBars,
+    oceanWaves,
+    barsAndWaves,
+    tronGrid,
+    barbieSparkle,
+    discoGrid
+  };
+  currentMode = modes[modeName] || liquidBars;
+}
+
+// ===============================
+// DRAW LOOP
+// ===============================
+
+function draw() {
+  requestAnimationFrame(draw);
+  currentMode();
+}
+
+draw();
