@@ -114,3 +114,100 @@ function formatTime(seconds) {
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
+// ===============================
+// RETRO 2000s WAVE VISUALIZER
+// ===============================
+
+// Grab the audio element you already have
+const audioElement = document.getElementById("audio");
+
+// Create the canvas AFTER you add it to HTML
+const canvas = document.getElementById("visualizer");
+const ctx = canvas.getContext("2d");
+
+// Resize canvas to match player width
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// Create AudioContext + Analyser
+let audioCtx;
+let analyser;
+let source;
+
+// Initialize visualizer when audio starts
+function initVisualizer() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+
+        // Retro wave settings
+        analyser.fftSize = 2048;
+        analyser.smoothingTimeConstant = 0.85;
+
+        source = audioCtx.createMediaElementSource(audioElement);
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+    }
+}
+
+// Animation loop
+function drawWave() {
+    requestAnimationFrame(drawWave);
+
+    if (!analyser) return;
+
+    const bufferLength = analyser.fftSize;
+    const dataArray = new Uint8Array(bufferLength);
+    analyser.getByteTimeDomainData(dataArray);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Retro neon glow
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#00eaff"; // cyan glow
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = "#00eaff";
+
+    ctx.beginPath();
+
+    const sliceWidth = canvas.width / bufferLength;
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+        const v = dataArray[i] / 128.0; // normalize
+        const y = (v * canvas.height) / 2;
+
+        if (i === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.quadraticCurveTo(x - sliceWidth, y, x, y); // smooth retro curve
+        }
+
+        x += sliceWidth;
+    }
+
+    ctx.stroke();
+}
+
+// Hook into your existing play button
+audioElement.addEventListener("play", () => {
+    initVisualizer();
+    drawWave();
+});
+
+// Also resume AudioContext if paused
+audioElement.addEventListener("pause", () => {
+    if (audioCtx && audioCtx.state === "running") {
+        audioCtx.suspend();
+    }
+});
+
+audioElement.addEventListener("play", () => {
+    if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+    }
+});
