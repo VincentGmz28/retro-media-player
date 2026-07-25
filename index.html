@@ -56,21 +56,23 @@
               <span class="wmp-title">Now Playing</span>
             </div>
 
+            <!-- ⭐ Visualizer gets full height now -->
             <div class="wmp-display">
               <canvas id="visualizer"></canvas>
-
-              <!-- ⭐ Added visualizer selector -->
-              <div class="visualizer-mode-box">
-                <select id="visualizer-mode">
-                  <option value="wave">Waveform</option>
-                  <option value="bars">Bars</option>
-                  <option value="circle">Circle</option>
-                  <option value="dots">Dots</option>
-                </select>
-              </div>
-
-              <audio id="audio-player" src="Daft Punk - Lose Yourself to Dance (Official Version).mp3"></audio>
             </div>
+
+            <!-- ⭐ Moved OUTSIDE the display so it doesn't steal height -->
+            <div class="visualizer-mode-box">
+              <select id="visualizer-mode">
+                <option value="wave">Waveform</option>
+                <option value="bars">Bars</option>
+                <option value="circle">Circle</option>
+                <option value="dots">Dots</option>
+              </select>
+            </div>
+
+            <!-- ⭐ Moved OUTSIDE the display -->
+            <audio id="audio-player" src="Daft Punk - Lose Yourself to Dance (Official Version).mp3"></audio>
 
             <div class="wmp-track-info">
               <span id="track-title">Track Title</span>
@@ -116,7 +118,7 @@
       document.getElementById("skinStylesheet").href = file + "?v=" + Date.now();
     }
   </script>
-  </body>
+
   <script src="script.js?v=200"></script>
   <script src="player.js?v=200"></script>
   
