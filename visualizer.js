@@ -71,7 +71,6 @@ function barsAndWaves() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Bars
   const barWidth = canvas.width / buffer.length;
   for (let i = 0; i < buffer.length; i++) {
     const barHeight = buffer[i];
@@ -79,7 +78,6 @@ function barsAndWaves() {
     ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 2, barHeight);
   }
 
-  // Wave
   ctx.beginPath();
   ctx.moveTo(0, canvas.height / 2);
   for (let i = 0; i < buffer.length; i++) {
@@ -92,7 +90,6 @@ function barsAndWaves() {
   ctx.stroke();
 }
 
-// Tron mode
 function tronGrid() {
   analyzer.getByteFrequencyData(buffer);
 
@@ -111,7 +108,6 @@ function tronGrid() {
   }
 }
 
-// Barbie mode
 function barbieSparkle() {
   analyzer.getByteFrequencyData(buffer);
 
@@ -129,7 +125,6 @@ function barbieSparkle() {
   }
 }
 
-// Disco mode
 function discoGrid() {
   analyzer.getByteFrequencyData(buffer);
 
