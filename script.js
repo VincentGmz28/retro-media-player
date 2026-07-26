@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===============================
-// COLOR CYCLING ENGINE
+// COLOR CYCLING ENGINE (gentle)
 // ===============================
 
 let hue = 200;
