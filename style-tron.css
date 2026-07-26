@@ -143,5 +143,5 @@ body::before {
 .wmp-btn img {
   color: #00eaff;
   fill: #00eaff;
-  filter: drop-shadow(0 0 6px #00eaff);
+  filter: none;
 }
