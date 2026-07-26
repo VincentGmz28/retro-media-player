@@ -5,8 +5,7 @@ body.barbie-theme {
   color: #ffffff;
 }
 
-/* Frame */
-.wmp-frame {
+body.barbie-theme .wmp-frame {
   background: #ffb6d5;
   border: 2px solid #ff4fa3;
   box-shadow:
@@ -14,22 +13,20 @@ body.barbie-theme {
     0 0 12px #ff4fa3;
 }
 
-/* Title Bar */
-.wmp-titlebar {
+body.barbie-theme .wmp-titlebar {
   background: #ff4fa3;
   color: #ffffff;
   border-bottom: 2px solid #d93b85;
   text-shadow: 0 0 6px #ff4fa3;
 }
 
-.wmp-icon {
+body.barbie-theme .wmp-icon {
   background: #ffb6d5;
   border-radius: 3px;
   box-shadow: 0 0 6px #ff4fa3;
 }
 
-/* Display */
-.wmp-display {
+body.barbie-theme .wmp-display {
   background: #ffb6d5;
   border: 2px solid #ff4fa3;
   box-shadow:
@@ -37,9 +34,8 @@ body.barbie-theme {
     0 0 10px #ff4fa3;
 }
 
-/* Visualizer */
-.visualizer,
-.barbie-visualizer {
+body.barbie-theme .visualizer,
+body.barbie-theme .barbie-visualizer {
   background-color: #ffb6d5 !important;
   border: 2px solid #ff4fa3;
   box-shadow:
@@ -47,16 +43,14 @@ body.barbie-theme {
     0 0 10px #ff4fa3;
 }
 
-/* Track Info */
-.wmp-track-info {
+body.barbie-theme .wmp-track-info {
   background: #ffb6d5;
   border-top: 1px solid #ff4fa3;
   border-bottom: 1px solid #ff4fa3;
   color: #ffffff;
 }
 
-/* Controls */
-.wmp-btn {
+body.barbie-theme .wmp-btn {
   border: 2px solid #ff4fa3;
   background: #ffb6d5;
   color: #ffffff;
@@ -65,33 +59,30 @@ body.barbie-theme {
     0 0 10px #ff4fa3;
 }
 
-.wmp-btn:hover {
+body.barbie-theme .wmp-btn:hover {
   background: #ff8fc2;
 }
 
-/* Seek + Volume */
-#seek-bar,
-#volume-bar {
+body.barbie-theme #seek-bar,
+body.barbie-theme #volume-bar {
   accent-color: #ff4fa3;
 }
 
-/* Status Bar */
-.wmp-status {
+body.barbie-theme .wmp-status {
   background: #ffb6d5;
   color: #ffffff;
   border-top: 1px solid #ff4fa3;
 }
 
-/* Sidebar */
-#sidebar,
-#profile-header,
-#footer {
+body.barbie-theme #sidebar,
+body.barbie-theme #profile-header,
+body.barbie-theme #footer {
   border: 2px solid #ff4fa3;
   background: #ffb6d5;
   box-shadow: 0 0 10px #ff4fa3;
 }
 
-.profile-pic {
+body.barbie-theme .profile-pic {
   background: #ffb6d5;
   border: 2px solid #ff4fa3;
   box-shadow: inset 0 0 10px #ff4fa3;
