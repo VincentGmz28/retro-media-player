@@ -1,32 +1,31 @@
-/* TRON — Neon Blue Cyber Skin */
+/* Tron Theme */
 
-body {
-  background: radial-gradient(circle at center, #0a0f1f 0%, #000 70%);
+body.tron-theme {
+  background: #000;
   color: #00eaff;
-  font-family: "Orbitron", Tahoma, sans-serif;
 }
 
 /* Frame */
 .wmp-frame {
-  background: rgba(0, 0, 0, 0.7);
+  background: #000;
   border: 2px solid #00eaff;
   box-shadow:
-    0 0 20px #00eaff,
-    inset 0 0 20px rgba(0, 255, 255, 0.3);
+    inset 0 0 10px #00eaff,
+    0 0 12px #00eaff;
 }
 
 /* Title Bar */
 .wmp-titlebar {
-  background: linear-gradient(90deg, #00111a, #003344);
+  background: #001f2f;
   color: #00eaff;
   border-bottom: 2px solid #00eaff;
-  text-shadow: 0 0 8px #00eaff;
+  text-shadow: 0 0 6px #00eaff;
 }
 
 .wmp-icon {
-  background: #00eaff;
+  background: #000;
   border-radius: 3px;
-  box-shadow: 0 0 10px #00eaff;
+  box-shadow: 0 0 6px #00eaff;
 }
 
 /* Display */
@@ -34,48 +33,53 @@ body {
   background: #000;
   border: 2px solid #00eaff;
   box-shadow:
-    inset 0 0 25px #00eaff,
-    0 0 20px #00eaff;
+    inset 0 0 20px #00eaff,
+    0 0 10px #00eaff;
+}
+
+/* Visualizer */
+.visualizer,
+.tron-visualizer {
+  background-color: #000 !important;
+  border: 2px solid #00eaff;
+  box-shadow:
+    inset 0 0 20px #00eaff,
+    0 0 10px #00eaff;
 }
 
 /* Track Info */
 .wmp-track-info {
-  background: rgba(0, 20, 40, 0.8);
+  background: #000;
   border-top: 1px solid #00eaff;
   border-bottom: 1px solid #00eaff;
   color: #00eaff;
-  text-shadow: 0 0 6px #00eaff;
 }
 
 /* Controls */
 .wmp-btn {
   border: 2px solid #00eaff;
-  background: rgba(0, 0, 0, 0.6);
+  background: #000;
+  color: #00eaff;
   box-shadow:
-    0 0 10px #00eaff,
-    inset 0 0 10px #00eaff;
+    inset 0 0 6px #00eaff,
+    0 0 10px #00eaff;
 }
 
 .wmp-btn:hover {
-  background: rgba(0, 40, 60, 0.8);
-  box-shadow:
-    0 0 15px #00eaff,
-    inset 0 0 15px #00eaff;
+  background: #001f2f;
 }
 
 /* Seek + Volume */
 #seek-bar,
 #volume-bar {
   accent-color: #00eaff;
-  filter: drop-shadow(0 0 6px #00eaff);
 }
 
 /* Status Bar */
 .wmp-status {
-  background: rgba(0, 20, 40, 0.8);
+  background: #000;
   color: #00eaff;
   border-top: 1px solid #00eaff;
-  text-shadow: 0 0 6px #00eaff;
 }
 
 /* Sidebar */
@@ -83,65 +87,12 @@ body {
 #profile-header,
 #footer {
   border: 2px solid #00eaff;
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 15px #00eaff;
+  background: #000;
+  box-shadow: 0 0 10px #00eaff;
 }
 
 .profile-pic {
-  background: #001a26;
-  border: 2px solid #00eaff;
-  box-shadow: inset 0 0 20px #00eaff;
-}
-
-/* TRON Full-Page Moving Grid Background */
-body {
-  position: relative;
   background: #000;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-
-  background:
-    linear-gradient(#00eaff 1px, transparent 1px),
-    linear-gradient(90deg, #00eaff 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.15;
-
-  animation: tronGridMove 6s linear infinite;
-}
-
-@keyframes tronGridMove {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 40px 40px;
-  }
-}
-
-.wmp-display #visualizer {
-  width: 100%;
-  height: 100%;
-}
-
-.wmp-btn {
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.wmp-btn i,
-.wmp-btn svg,
-.wmp-btn img {
-  color: #3a4b6b;
-  fill: #3a4b6b;
-  filter: none;
+  border: 2px solid #00eaff;
+  box-shadow: inset 0 0 10px #00eaff;
 }
