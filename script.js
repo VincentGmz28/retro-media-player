@@ -15,7 +15,7 @@ const trackArtist = document.getElementById("track-artist");
 // PLAYLIST SYSTEM
 // ===============================
 
-const playlist = [
+const songs = [
   {
     title: "Lose Yourself to Dance",
     artist: "Daft Punk",
