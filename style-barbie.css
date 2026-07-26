@@ -110,7 +110,6 @@ body::before {
     radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 60%),
     radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%),
     radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 80%);
-
   background-size: 12px 12px, 20px 20px, 30px 30px;
   background-position: 0 0, 50px 80px, 120px 40px;
 
@@ -118,17 +117,19 @@ body::before {
   opacity: 0.45;
 }
 
-@keyframes barbieSparkleFloat {
-  0% {
-    background-position: 0 0, 50px 80px, 120px 40px;
-  }
-  100% {
-    background-position: 300px -300px, 350px -220px, 420px -260px;
-  }
+.wmp-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ⭐ VISUALIZER BLOCK — added cleanly at bottom */
-.wmp-display #visualizer {
-  width: 100%;
-  height: 140px;
+.wmp-btn i,
+.wmp-btn svg,
+.wmp-btn img {
+  color: #ff4fa3;
+  fill: #ff4fa3;
+  filter: drop-shadow(0 0 6px #ff4fa3);
 }
