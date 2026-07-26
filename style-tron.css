@@ -124,22 +124,11 @@ body::before {
   }
 }
 
-/* ⭐ VISUALIZER BLOCK — added cleanly at bottom */
 .wmp-display #visualizer {
   width: 100%;
   height: 140px;
 }
 
-/* FIX 1 — Restore button icons */
-.wmp-btn i,
-.wmp-btn svg,
-.wmp-btn img {
-  color: #00eaff;
-  fill: #00eaff;
-  filter: drop-shadow(0 0 6px #00eaff);
-}
-
-/* FIX 2 — Restore correct scaling */
 .wmp-btn {
   width: 40px;
   height: 40px;
@@ -147,4 +136,12 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.wmp-btn i,
+.wmp-btn svg,
+.wmp-btn img {
+  color: #00eaff;
+  fill: #00eaff;
+  filter: drop-shadow(0 0 6px #00eaff);
 }
