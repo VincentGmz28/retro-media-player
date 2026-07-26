@@ -1,135 +1,98 @@
-/* BARBIE — Pink Glitter Dreamhouse Skin */
+/* Barbie Theme */
 
-body {
-  background: linear-gradient(180deg, #ffe6f7, #ffb6e6);
-  font-family: "Comic Sans MS", Tahoma, sans-serif;
-  color: #ff1493;
+body.barbie-theme {
+  background: #ffb6d5;
+  color: #ffffff;
 }
 
 /* Frame */
 .wmp-frame {
-  background: #fff0fa;
-  border: 2px solid #ff4db8;
+  background: #ffb6d5;
+  border: 2px solid #ff4fa3;
   box-shadow:
-    0 0 20px #ff4db8,
-    inset 0 0 20px #ffb6e6;
+    inset 0 0 10px #ff4fa3,
+    0 0 12px #ff4fa3;
 }
 
 /* Title Bar */
 .wmp-titlebar {
-  background: linear-gradient(90deg, #ff4db8, #ff1493);
-  color: white;
-  border-bottom: 2px solid #ff1493;
-  text-shadow: 0 0 6px white;
+  background: #ff4fa3;
+  color: #ffffff;
+  border-bottom: 2px solid #d93b85;
+  text-shadow: 0 0 6px #ff4fa3;
 }
 
 .wmp-icon {
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #ff1493;
+  background: #ffb6d5;
+  border-radius: 3px;
+  box-shadow: 0 0 6px #ff4fa3;
 }
 
 /* Display */
 .wmp-display {
-  background: #fff;
-  border: 2px solid #ff4db8;
+  background: #ffb6d5;
+  border: 2px solid #ff4fa3;
   box-shadow:
-    inset 0 0 25px #ffb6e6,
-    0 0 20px #ff4db8;
+    inset 0 0 20px #ff4fa3,
+    0 0 10px #ff4fa3;
+}
+
+/* Visualizer */
+.visualizer,
+.barbie-visualizer {
+  background-color: #ffb6d5 !important;
+  border: 2px solid #ff4fa3;
+  box-shadow:
+    inset 0 0 20px #ff4fa3,
+    0 0 10px #ff4fa3;
 }
 
 /* Track Info */
 .wmp-track-info {
-  background: #ffe6f7;
-  border-top: 2px solid #ff4db8;
-  border-bottom: 2px solid #ff4db8;
-  color: #ff1493;
-  text-shadow: 0 0 4px #ffb6e6;
+  background: #ffb6d5;
+  border-top: 1px solid #ff4fa3;
+  border-bottom: 1px solid #ff4fa3;
+  color: #ffffff;
 }
 
 /* Controls */
 .wmp-btn {
-  border: 2px solid #ff4db8;
-  background: linear-gradient(180deg, #fff, #ffe6f7);
+  border: 2px solid #ff4fa3;
+  background: #ffb6d5;
+  color: #ffffff;
   box-shadow:
-    0 0 10px #ff4db8,
-    inset 0 0 10px #ffb6e6;
+    inset 0 0 6px #ff4fa3,
+    0 0 10px #ff4fa3;
 }
 
 .wmp-btn:hover {
-  background: linear-gradient(180deg, #fff, #ffd2ef);
-  box-shadow:
-    0 0 15px #ff4db8,
-    inset 0 0 15px #ffb6e6;
+  background: #ff8fc2;
 }
 
 /* Seek + Volume */
 #seek-bar,
 #volume-bar {
-  accent-color: #ff1493;
-  filter: drop-shadow(0 0 6px #ff4db8);
+  accent-color: #ff4fa3;
 }
 
 /* Status Bar */
 .wmp-status {
-  background: #ffe6f7;
-  color: #ff1493;
-  border-top: 2px solid #ff4db8;
-  text-shadow: 0 0 4px #ffb6e6;
+  background: #ffb6d5;
+  color: #ffffff;
+  border-top: 1px solid #ff4fa3;
 }
 
 /* Sidebar */
 #sidebar,
 #profile-header,
 #footer {
-  border: 2px solid #ff4db8;
-  background: #fff0fa;
-  box-shadow: 0 0 15px #ff4db8;
+  border: 2px solid #ff4fa3;
+  background: #ffb6d5;
+  box-shadow: 0 0 10px #ff4fa3;
 }
 
 .profile-pic {
-  background: #ffd2ef;
-  border: 2px solid #ff4db8;
-  box-shadow: inset 0 0 20px #ffb6e6;
-}
-
-/* ✨ Barbie Glitter Animation Overlay ✨ */
-body {
-  position: relative;
-  overflow-x: hidden;
-  background: linear-gradient(180deg, #ffe6f7, #ffb6e6);
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 60%),
-    radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%),
-    radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 80%);
-  background-size: 12px 12px, 20px 20px, 30px 30px;
-  background-position: 0 0, 50px 80px, 120px 40px;
-
-  animation: barbieSparkleFloat 12s linear infinite;
-  opacity: 0.45;
-}
-
-.wmp-btn {
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.wmp-btn i,
-.wmp-btn svg,
-.wmp-btn img {
-  color: #ff4fa3;
-  fill: #ff4fa3;
-  filter: none;
+  background: #ffb6d5;
+  border: 2px solid #ff4fa3;
+  box-shadow: inset 0 0 10px #ff4fa3;
 }
