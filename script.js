@@ -24,7 +24,7 @@ const songs = [
   {
     title: "So Long, London",
     artist: "Taylor Swift",
-    src: "Taylor Swift - So Long, London (Official Lyric Video).mp3"
+    file: "Taylor Swift - So Long, London (Official Lyric Video).mp3"
   }
 ];
 
@@ -32,7 +32,7 @@ let currentTrack = 0;
 
 function loadTrack(index) {
   currentTrack = index;
-  const track = playlist[currentTrack];
+  const track = songs[currentTrack];
 
   audio.src = track.file;
   trackTitle.textContent = track.title;
@@ -56,12 +56,12 @@ document.getElementById("stop-btn").onclick = () => {
 };
 
 document.getElementById("next-btn").onclick = () => {
-  currentTrack = (currentTrack + 1) % playlist.length;
+  currentTrack = (currentTrack + 1) % songs.length;
   loadTrack(currentTrack);
 };
 
 document.getElementById("prev-btn").onclick = () => {
-  currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+  currentTrack = (currentTrack - 1 + songs.length) % songs.length;
   loadTrack(currentTrack);
 };
 
@@ -73,7 +73,7 @@ document.getElementById("repeat-btn").onclick = () => {
 
 audio.onended = () => {
   if (!repeatEnabled) {
-    currentTrack = (currentTrack + 1) % playlist.length;
+    currentTrack = (currentTrack + 1) % songs.length;
     loadTrack(currentTrack);
   }
 };
@@ -148,10 +148,8 @@ function initVisualizer() {
     }
 }
 
-// ⭐ MODE SYSTEM
 let mode = "wave";
 
-// ⭐ FIX — ensures dropdown works
 document.addEventListener("DOMContentLoaded", () => {
   const modeSelector = document.getElementById("visualizer-mode");
   if (modeSelector) {
@@ -165,10 +163,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // COLOR CYCLING ENGINE
 // ===============================
 
-let hue = 0;
+let hue = 200;
 function nextColor() {
-  hue = (hue + 0.5) % 360;
-  return `hsl(${hue}, 100%, 60%)`;
+  hue = (hue + 0.1) % 360;
+  return `hsl(${hue}, 45%, 70%)`;
 }
 
 // ===============================
@@ -181,7 +179,7 @@ function applyMotionBlur() {
 }
 
 // ===============================
-// VISUALIZER #1 — WAVEFORM (⭐ FIXED CENTERING)
+// VISUALIZER #1 — WAVEFORM
 // ===============================
 
 function drawWave() {
@@ -203,14 +201,11 @@ function drawWave() {
     const sliceWidth = canvas.width / bufferLength;
     let x = 0;
 
-    // ⭐ FIX — center waveform properly
     const centerY = canvas.height / 2;
     const amplitude = canvas.height * 0.25;
 
     for (let i = 0; i < bufferLength; i++) {
         const v = dataArray[i] / 128.0;
-
-        // ⭐ FIXED LINE — centers the waveform
         const y = centerY + (v - 1) * amplitude;
 
         if (i === 0) {
@@ -226,7 +221,7 @@ function drawWave() {
 }
 
 // ===============================
-// VISUALIZER #2 — BARS (unchanged)
+// VISUALIZER #2 — BARS
 // ===============================
 
 function drawBars() {
@@ -252,7 +247,7 @@ function drawBars() {
 }
 
 // ===============================
-// VISUALIZER #3 — RADIAL BURST (unchanged)
+// VISUALIZER #3 — RADIAL BURST
 // ===============================
 
 function drawRadialBurst() {
@@ -297,7 +292,7 @@ function drawRadialBurst() {
 }
 
 // ===============================
-// VISUALIZER #4 — ENERGY ORB (unchanged)
+// VISUALIZER #4 — ENERGY ORB
 // ===============================
 
 function drawEnergyOrb() {
@@ -321,14 +316,12 @@ function drawEnergyOrb() {
     ctx.shadowBlur = 30;
     ctx.shadowColor = nextColor();
 
-    // Outer glow ring
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius + treble * 40, 0, Math.PI * 2);
     ctx.strokeStyle = nextColor();
     ctx.lineWidth = 10;
     ctx.stroke();
 
-    // Core orb
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
     ctx.fillStyle = nextColor();
