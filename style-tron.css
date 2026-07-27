@@ -2,7 +2,7 @@
 
 body {
     background-color: #000000;
-    color: #0ff; /* FIX: readable neon text */
+    color: #0ff;
     font-family: "Orbitron", sans-serif;
 }
 
@@ -74,36 +74,4 @@ button {
 
 button:hover {
     background-color: #00545a;
-}
-
-.wmp-frame {
-    background-color: #001f21;
-    border: 3px solid #0ff;
-    border-radius: 15px;
-    padding: 20px;
-}
-
-.wmp-titlebar {
-    background-color: #003b40;
-    color: #0ff;
-    padding: 10px;
-    border-bottom: 3px solid #0ff;
-    border-radius: 10px 10px 0 0;
-}
-
-.wmp-display {
-    background-color: #002a2d;
-    border: 3px solid #0ff;
-    height: 200px;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-.visualizer-mode-box select {
-    background-color: #003b40;
-    color: #0ff;
-    border: 2px solid #0ff;
-    padding: 5px;
-    border-radius: 5px;
-    margin-top: 10px;
 }
