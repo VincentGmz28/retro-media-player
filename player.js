@@ -1,7 +1,3 @@
-/* ============================
-   RETRO MEDIA PLAYER 
-   ============================ */
-
 const audio = document.getElementById("audio-player");
 const playBtn = document.getElementById("play-btn");
 const pauseBtn = document.getElementById("pause-btn");
@@ -26,10 +22,6 @@ const ctx = canvas.getContext("2d");
 canvas.width = 600;
 canvas.height = 200;
 
-/* ============================
-   PLAYLIST SYSTEM
-   ============================ */
-
 const playlist = [
   {
     title: "Lose Yourself to Dance",
@@ -47,23 +39,13 @@ let currentTrack = 0;
 let repeatMode = "none";
 let shuffle = false;
 
-/* ============================
-   LOAD TRACK
-   ============================ */
-
 function loadTrack(index) {
   const track = playlist[index];
   audio.src = track.file;
-
   trackTitleEl.textContent = track.title;
   trackArtistEl.textContent = track.artist;
-
   audio.load();
 }
-
-/* ============================
-   AUDIO + VISUALIZER SETUP
-   ============================ */
 
 const audioCtx = new AudioContext();
 const analyser = audioCtx.createAnalyser();
@@ -73,7 +55,6 @@ let visualizerReady = false;
 function initVisualizer() {
   if (visualizerReady) return;
   visualizerReady = true;
-
   const source = audioCtx.createMediaElementSource(audio);
   source.connect(analyser);
   analyser.connect(audioCtx.destination);
@@ -82,10 +63,6 @@ function initVisualizer() {
 analyser.fftSize = 256;
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
-
-/* ============================
-   PLAYBACK CONTROLS
-   ============================ */
 
 function startAudio() {
   if (audioCtx.state === "suspended") audioCtx.resume();
@@ -113,49 +90,32 @@ prevBtn.addEventListener("click", () => {
   startAudio();
 });
 
-/* ============================
-   REPEAT MODE
-   ============================ */
-
 repeatBtn.addEventListener("click", () => {
   if (repeatMode === "none") repeatMode = "one";
   else if (repeatMode === "one") repeatMode = "all";
   else repeatMode = "none";
-
   repeatBtn.textContent =
     repeatMode === "one" ? "🔂" :
     repeatMode === "all" ? "🔁" :
     "🔁";
 });
 
-/* ============================
-   AUTO NEXT TRACK
-   ============================ */
-
 audio.addEventListener("ended", () => {
   if (repeatMode === "one") {
     startAudio();
     return;
   }
-
   currentTrack++;
-
   if (currentTrack >= playlist.length) {
     if (repeatMode === "all") currentTrack = 0;
     else return;
   }
-
   loadTrack(currentTrack);
   startAudio();
 });
 
-/* ============================
-   SEEK BAR
-   ============================ */
-
 audio.addEventListener("timeupdate", () => {
   seekBar.value = (audio.currentTime / audio.duration) * 100;
-
   currentTimeEl.textContent = formatTime(audio.currentTime);
   durationEl.textContent = formatTime(audio.duration);
 });
@@ -164,17 +124,9 @@ seekBar.addEventListener("input", () => {
   audio.currentTime = (seekBar.value / 100) * audio.duration;
 });
 
-/* ============================
-   VOLUME CONTROL
-   ============================ */
-
 volumeBar.addEventListener("input", () => {
   audio.volume = volumeBar.value;
 });
-
-/* ============================
-   TIME FORMATTER
-   ============================ */
 
 function formatTime(sec) {
   if (!sec || isNaN(sec)) return "0:00";
@@ -183,20 +135,12 @@ function formatTime(sec) {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
-/* ============================
-   2006 COLOR SHIFT ENGINE
-   ============================ */
-
 let hue = 0;
 
 function get2006Color(alpha = 1) {
   hue = (hue + 0.5) % 360;
   return `hsla(${hue}, 80%, 60%, ${alpha})`;
 }
-
-/* ============================
-   STARFIELD (CIRCLE MODE)
-   ============================ */
 
 let stars = [];
 const STAR_COUNT = 120;
@@ -213,28 +157,70 @@ function initStars() {
 
 initStars();
 
-/* ============================
-   VISUALIZER DRAW LOOP
-   ============================ */
+let bgHue = 0;
+let orbAngle = 0;
+let stripeOffset = 0;
+
+function bgBars() {
+  stripeOffset += 1;
+  ctx.fillStyle = "#0E2233";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(255,255,255,0.05)";
+  for (let i = -50; i < canvas.width; i += 50) {
+    ctx.fillRect(i + stripeOffset, 0, 25, canvas.height);
+  }
+}
+
+function bgWave() {
+  bgHue = (bgHue + 0.2) % 360;
+  const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  g.addColorStop(0, `hsla(${bgHue}, 70%, 15%, 1)`);
+  g.addColorStop(1, `hsla(${(bgHue + 60) % 360}, 70%, 10%, 1)`);
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function bgCircle() {
+  orbAngle += 0.01;
+  const g = ctx.createRadialGradient(
+    canvas.width / 2,
+    canvas.height / 2,
+    20,
+    canvas.width / 2,
+    canvas.height / 2,
+    300
+  );
+  g.addColorStop(0, `hsla(${orbAngle * 50}, 80%, 60%, 0.8)`);
+  g.addColorStop(1, "hsla(0, 0%, 0%, 0.2)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function bgDots() {
+  orbAngle += 0.01;
+  const g = ctx.createRadialGradient(
+    canvas.width / 2,
+    canvas.height / 2,
+    10,
+    canvas.width / 2,
+    canvas.height / 2,
+    250
+  );
+  g.addColorStop(0, `hsla(${orbAngle * 40}, 90%, 95%, 1)`);
+  g.addColorStop(1, "hsla(0, 0%, 100%, 0.6)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
 
 function draw() {
   requestAnimationFrame(draw);
-
   analyser.getByteFrequencyData(dataArray);
-
   const mode = visualizerMode.value;
 
-  if (mode === "bars") {
-    ctx.fillStyle = "#0E2233";
-  } else if (mode === "wave") {
-    ctx.fillStyle = "#001122";
-  } else if (mode === "circle") {
-    ctx.fillStyle = "#111111";
-  } else if (mode === "dots") {
-    ctx.fillStyle = "#FAF8FF";
-  }
-
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  if (mode === "bars") bgBars();
+  else if (mode === "wave") bgWave();
+  else if (mode === "circle") bgCircle();
+  else if (mode === "dots") bgDots();
 
   if (mode === "bars") drawBars();
   else if (mode === "wave") drawWave();
@@ -242,37 +228,26 @@ function draw() {
   else if (mode === "dots") drawEnergyBliss();
 }
 
-/* ============================
-   MODE: BARS (2006 RETRO)
-   ============================ */
-
 function drawBars() {
   let bass = 0;
   for (let i = 0; i < bufferLength / 4; i++) bass += dataArray[i];
   bass = bass / (bufferLength / 4);
-  const bassScale = 0.8 + bass * 0.002;
+  const bassScale = 0.8 + bass * 0.003;
 
-  const barWidth = canvas.width / bufferLength;
+  const barWidth = (canvas.width / bufferLength) * 1.5;
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
     const v = dataArray[i];
     const barHeight = v * bassScale;
-
     ctx.fillStyle = "hsl(200, 90%, 60%)";
     ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-
     x += barWidth;
   }
 }
 
-/* ============================
-   MODE: WAVE (SMOOTH 2006)
-   ============================ */
-
 function drawWave() {
   analyser.getByteTimeDomainData(dataArray);
-
   ctx.beginPath();
   ctx.lineWidth = 3;
   ctx.strokeStyle = get2006Color(0.8);
@@ -282,33 +257,25 @@ function drawWave() {
 
   for (let i = 0; i < bufferLength; i++) {
     const v = dataArray[i] / 255;
-
-    // SMOOTHING + REDUCED MOTION
     const y = canvas.height / 2 + (v - 0.5) * 80;
-
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
-
     x += slice;
   }
 
   ctx.stroke();
 }
 
-/* ============================
-   MODE: CIRCLE (STARFIELD)
-   ============================ */
-
 function drawCircle() {
-  ctx.fillStyle = "#111111";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
   let bass = 0;
   for (let i = 0; i < bufferLength / 4; i++) bass += dataArray[i];
   bass = bass / (bufferLength / 4);
   const bassBoost = bass * 0.015;
 
-  ctx.fillStyle = get2006Color(0.9);
+  ctx.fillStyle = "rgba(255,255,255,0.9)";
+  ctx.shadowColor = "white";
+  ctx.shadowBlur = 8;
+
 
   if (audio.paused) {
     for (const star of stars) {
@@ -320,8 +287,7 @@ function drawCircle() {
   }
 
   for (const star of stars) {
-    const movement = star.speed * 0.15 + bassBoost;
-
+    const movement = star.speed * 0.2 + bassBoost;
     star.x += Math.cos(star.angle) * movement;
     star.y += Math.sin(star.angle) * movement;
 
@@ -336,15 +302,11 @@ function drawCircle() {
       star.x = canvas.width / 2;
       star.y = canvas.height / 2;
       star.angle = Math.random() * Math.PI * 2;
-      star.speed = Math.random() * 0.5 + 0.5;
+      star.speed = Math.random() * 0.3 + 0.3;
       star.size = Math.random() * 2 + 1;
     }
   }
 }
-
-/* ============================
-   MODE: ENERGY BLISS (DOTS)
-   ============================ */
 
 function drawEnergyBliss() {
   analyser.getByteFrequencyData(dataArray);
@@ -367,7 +329,7 @@ function drawEnergyBliss() {
     const x = centerX + Math.cos(angle) * radius;
     const y = centerY + Math.sin(angle) * radius;
 
-    ctx.fillStyle = get2006Color(0.9);
+    ctx.fillStyle = "#ff8ac6";
 
     ctx.beginPath();
     ctx.arc(x, y, 4, 0, Math.PI * 2);
@@ -378,9 +340,4 @@ function drawEnergyBliss() {
 }
 
 draw();
-
-/* ============================
-   INIT
-   ============================ */
-
 loadTrack(currentTrack);
