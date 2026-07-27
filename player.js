@@ -23,7 +23,6 @@ const visualizerMode = document.getElementById("visualizer-mode");
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
 
-/* ⭐ Canvas size handled here */
 canvas.width = 600;
 canvas.height = 200;
 
@@ -185,6 +184,17 @@ function formatTime(sec) {
 }
 
 /* ============================
+   2006 COLOR SHIFT ENGINE
+   ============================ */
+
+let hue = 0;
+
+function get2006Color(alpha =1) {
+   hue = (hue + 0.5) % 360; 
+   return 'hsla(${hue}, 80%, 60%, ${alpha})';
+}
+
+/* ============================
    VISUALIZER DRAW LOOP
    ============================ */
 
@@ -211,7 +221,7 @@ function drawBars() {
   const barWidth = canvas.width / bufferLength;
   for (let i = 0; i < bufferLength; i++) {
     const barHeight = dataArray[i];
-    ctx.fillStyle = "#3A6EA5";
+    ctx.fillStyle = "get2006Color()";
     ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth, barHeight);
   }
 }
@@ -221,15 +231,32 @@ function drawBars() {
    ============================ */
 
 function drawWave() {
-  ctx.beginPath();
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "#4AA3D8";
+  
+  if (audio.paused) return;
 
+  ctx.beginPath();
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "get2006Color()";
+
+  const mid = canvas.height / 2;           
   const slice = canvas.width / bufferLength;
   let x = 0;
 
+  // Bass detection (lower frequencies)
+  let bass = 0;
+  for (let i = 0; i < bufferLength / 4; i++) {
+    bass += dataArray[i];
+  }
+  bass = bass / (bufferLength / 4);        
+  const bassBoost = bass * 0.4;            
+
   for (let i = 0; i < bufferLength; i++) {
-    const y = (dataArray[i] / 255) * canvas.height;
+    const normalized = dataArray[i] / 255;
+
+    const waveHeight = Math.sin(i * 0.15 + audio.currentTime * 4) * 20;
+
+    const y = mid + waveHeight + normalized * bassBoost;
+
     ctx.lineTo(x, y);
     x += slice;
   }
@@ -238,26 +265,57 @@ function drawWave() {
 }
 
 /* ============================
-   MODE: STARFIELD
+   MODE: STARFIELD (WMP Style)
    ============================ */
 
+let stars = [];
+const STAR_COUNT = 120;
+
+function initStars() {
+  stars = [];
+  for (let i = 0; i < STAR_COUNT; i++) {
+    stars.push({
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      angle: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.5 + 0.5,
+      size: Math.random() * 2 + 1
+    });
+  }
+}
+
+initStars();
+
 function drawCircle() {
-  ctx.fillStyle = "#FFFFFF";
-  ctx.globalAlpha = 0.8;
+  if (audio.paused) return;
 
-  const starCount = 80;
+  let bass = 0;
+  for (let i = 0; i < bufferLength / 4; i++) bass += dataArray[i];
+  bass = bass / (bufferLength / 4);
+  const bassBoost = bass * 0.02; // star speed boost
 
-  for (let i = 0; i < starCount; i++) {
-    const size = (dataArray[i % bufferLength] / 255) * 3;
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
+  ctx.fillStyle = "get2006Color()";
+
+  for (let star of stars) {
+
+    star.x += Math.cos(star.angle) * (star.speed + bassBoost);
+    star.y += Math.sin(star.angle) * (star.speed + bassBoost);
 
     ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
     ctx.fill();
-  }
 
-  ctx.globalAlpha = 1.0;
+    if (
+      star.x < 0 || star.x > canvas.width ||
+      star.y < 0 || star.y > canvas.height
+    ) {
+      star.x = canvas.width / 2;
+      star.y = canvas.height / 2;
+      star.angle = Math.random() * Math.PI * 2;
+      star.speed = Math.random() * 0.5 + 0.5;
+      star.size = Math.random() * 2 + 1;
+    }
+  }
 }
 
 /* ============================
@@ -275,7 +333,7 @@ function drawEnergyBliss() {
     const x = centerX + Math.cos(angle) * radius;
     const y = centerY + Math.sin(angle) * radius;
 
-    ctx.fillStyle = "#4AA3D8";
+    ctx.fillStyle = "get2006Color(0.7)";
     ctx.globalAlpha = 0.7;
 
     ctx.beginPath();
