@@ -26,12 +26,12 @@ const playlist = [
   {
     title: "Lose Yourself to Dance",
     artist: "Daft Punk",
-    file: "Daft Punk - Lose Yourself to Dance (Official Version).mp3"
+    file: "player/Daft Punk - Lose Yourself to Dance (Official Version).mp3"
   },
   {
     title: "So Long, London",
     artist: "Taylor Swift",
-    file: "Taylor Swift - So Long, London (Official Lyric Video).mp3"
+    file: "player/Taylor Swift - So Long, London (Official Lyric Video).mp3"
   }
 ];
 
