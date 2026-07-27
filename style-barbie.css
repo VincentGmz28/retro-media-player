@@ -1,96 +1,109 @@
-/* ================================
-   BARBIE DREAMWAVE THEME PRESET
-   ================================ */
+/* Barbie Theme - Pink and Playful */
 
-/* --- GLOBAL --- */
 body {
-  background: linear-gradient(180deg, #FF5EC4, #FF8AD6, #FFD6F2);
-  color: #FFFFFF;
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+    background-color: #ffccf9;
+    color: #000; /* FIX: readable text */
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-/* --- PLAYER PANEL --- */
-#player-container {
-  background: rgba(255, 182, 230, 0.85);
-  border: 3px solid #FF5EC4;
-  box-shadow:
-    0 0 20px #FF5EC4 inset,
-    0 0 14px #FF5EC4;
-  padding: 16px;
-  border-radius: 14px;
+#profile-header {
+    background: linear-gradient(135deg, #ff99e6, #ff66d9);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 4px solid #ff33cc;
 }
 
-/* --- TRACK INFO --- */
-#track-title {
-  color: #FFFFFF;
-  font-size: 22px;
-  font-weight: bold;
-  text-shadow: 0 0 10px #FF5EC4;
+#profile-header h1 {
+    font-size: 2.5em;
+    text-shadow: 2px 2px #ff33cc;
 }
 
-#track-artist {
-  color: #FFE6F7;
-  font-size: 15px;
-  text-shadow: 0 0 6px #FF8AD6;
+#profile-header .tagline {
+    font-size: 1.2em;
+    font-style: italic;
 }
 
-/* --- BUTTONS --- */
+#sidebar {
+    background-color: #ffb3ec;
+    border-right: 4px solid #ff33cc;
+    padding: 20px;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 200px;
+    background-color: #ff66d9;
+    border: 4px solid #ff33cc;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.about-box, .links-box {
+    background-color: #ff99e6;
+    border: 3px solid #ff33cc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.about-box h2, .links-box h2 {
+    color: #ff33cc;
+    text-shadow: 1px 1px white;
+}
+
+#main-content {
+    padding: 20px;
+}
+
+#skin-switcher h2 {
+    color: #ff33cc;
+    text-shadow: 1px 1px white;
+}
+
 button {
-  background: #FF5EC4;
-  border: 2px solid #FFFFFF;
-  color: #FFFFFF;
-  padding: 8px 16px;
-  border-radius: 20px;
-  transition: 0.15s ease;
-  font-weight: bold;
-  text-shadow: 0 0 6px #FFFFFF;
+    background-color: #ff66d9;
+    color: white;
+    border: 3px solid #ff33cc;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 button:hover {
-  background: #FF8AD6;
-  box-shadow: 0 0 12px #FFFFFF;
+    background-color: #ff33cc;
 }
 
-button:active {
-  background: #FFFFFF;
-  color: #FF5EC4;
-  text-shadow: none;
+.wmp-frame {
+    background-color: #ffb3ec;
+    border: 4px solid #ff33cc;
+    border-radius: 15px;
+    padding: 20px;
 }
 
-/* --- SLIDERS --- */
-input[type="range"] {
-  width: 100%;
-  background: #FFD6F2;
-  height: 6px;
-  border-radius: 3px;
+.wmp-titlebar {
+    background-color: #ff66d9;
+    color: white;
+    padding: 10px;
+    border-bottom: 3px solid #ff33cc;
+    border-radius: 10px 10px 0 0;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  background: #FF5EC4;
-  border-radius: 50%;
-  height: 18px;
-  width: 18px;
-  box-shadow: 0 0 10px #FF5EC4;
+.wmp-display {
+    background-color: #ff99e6;
+    border: 3px solid #ff33cc;
+    height: 200px;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
-/* --- VISUALIZER CANVAS --- */
-#visualizer {
-  background: #FFB6E6;
-  border: 3px solid #FF5EC4;
-  box-shadow:
-    0 0 20px #FF5EC4 inset,
-    0 0 14px #FF5EC4;
-  border-radius: 12px;
-}
-
-/* --- MODE DROPDOWN --- */
-#visualizer-mode {
-  background: #FF5EC4;
-  border: 2px solid #FFFFFF;
-  color: #FFFFFF;
-  padding: 6px;
-  border-radius: 12px;
-  font-weight: bold;
-  text-shadow: 0 0 6px #FFFFFF;
+.visualizer-mode-box select {
+    background-color: #ff66d9;
+    color: white;
+    border: 2px solid #ff33cc;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
 }
