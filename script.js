@@ -357,3 +357,18 @@ audioElement.addEventListener("play", () => {
         audioCtx.resume();
     }
 });
+
+// ===============================
+// ⭐ THEME SWITCHER (FIX)
+// ===============================
+
+const themes = ["classic-theme", "tron-theme", "barbie-theme"];
+
+function applyTheme(theme) {
+  themes.forEach(t => document.body.classList.remove(t));
+  document.body.classList.add(theme);
+}
+
+document.getElementById("theme-classic").onclick = () => applyTheme("classic-theme");
+document.getElementById("theme-tron").onclick = () => applyTheme("tron-theme");
+document.getElementById("theme-barbie").onclick = () => applyTheme("barbie-theme");
