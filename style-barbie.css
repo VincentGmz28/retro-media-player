@@ -1,0 +1,96 @@
+/* ================================
+   BARBIE DREAMWAVE THEME PRESET
+   ================================ */
+
+/* --- GLOBAL --- */
+body {
+  background: linear-gradient(180deg, #FF5EC4, #FF8AD6, #FFD6F2);
+  color: #FFFFFF;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+/* --- PLAYER PANEL --- */
+#player-container {
+  background: rgba(255, 182, 230, 0.85);
+  border: 3px solid #FF5EC4;
+  box-shadow:
+    0 0 20px #FF5EC4 inset,
+    0 0 14px #FF5EC4;
+  padding: 16px;
+  border-radius: 14px;
+}
+
+/* --- TRACK INFO --- */
+#track-title {
+  color: #FFFFFF;
+  font-size: 22px;
+  font-weight: bold;
+  text-shadow: 0 0 10px #FF5EC4;
+}
+
+#track-artist {
+  color: #FFE6F7;
+  font-size: 15px;
+  text-shadow: 0 0 6px #FF8AD6;
+}
+
+/* --- BUTTONS --- */
+button {
+  background: #FF5EC4;
+  border: 2px solid #FFFFFF;
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: 0.15s ease;
+  font-weight: bold;
+  text-shadow: 0 0 6px #FFFFFF;
+}
+
+button:hover {
+  background: #FF8AD6;
+  box-shadow: 0 0 12px #FFFFFF;
+}
+
+button:active {
+  background: #FFFFFF;
+  color: #FF5EC4;
+  text-shadow: none;
+}
+
+/* --- SLIDERS --- */
+input[type="range"] {
+  width: 100%;
+  background: #FFD6F2;
+  height: 6px;
+  border-radius: 3px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background: #FF5EC4;
+  border-radius: 50%;
+  height: 18px;
+  width: 18px;
+  box-shadow: 0 0 10px #FF5EC4;
+}
+
+/* --- VISUALIZER CANVAS --- */
+#visualizer {
+  background: #FFB6E6;
+  border: 3px solid #FF5EC4;
+  box-shadow:
+    0 0 20px #FF5EC4 inset,
+    0 0 14px #FF5EC4;
+  border-radius: 12px;
+}
+
+/* --- MODE DROPDOWN --- */
+#visualizer-mode {
+  background: #FF5EC4;
+  border: 2px solid #FFFFFF;
+  color: #FFFFFF;
+  padding: 6px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-shadow: 0 0 6px #FFFFFF;
+}
