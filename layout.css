@@ -1,0 +1,74 @@
+/* ====== GLOBAL PAGE STRUCTURE ====== */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ====== MAIN CONTENT WRAPPER ====== */
+
+.main-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* ====== LEFT SIDEBAR ====== */
+
+.sidebar {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ====== RIGHT CONTENT AREA ====== */
+
+.content-area {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ====== THEME SELECTOR ====== */
+
+.theme-selector {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+/* ====== MEDIA PLAYER LAYOUT ====== */
+
+.player {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+}
+
+/* ====== FOOTER ====== */
+
+.footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 10px 0;
+}
