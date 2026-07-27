@@ -1,119 +1,77 @@
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Retro Media Space</title>
+    <meta charset="UTF-8">
+    <title>Retro Media Space</title>
 
-  <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="layout.css">
 
-  <!-- Removed crashing stylesheet -->
-  <!-- <link id="skinStylesheet" rel="stylesheet" href="style.css"> -->
+    <!-- Theme stylesheet -->
+    <link id="skinStylesheet" rel="stylesheet" href="style-classic.css">
 </head>
 
 <body>
-  <div id="page-wrapper">
+    <div id="page-wrapper">
 
-    <header id="profile-header">
-      <h1>Retro Media Space</h1>
-      <p class="tagline">music • art • tech • nostalgia</p>
-    </header>
+        <header id="profile-header">
+            <h1>Retro Media Space</h1>
+            <p class="tagline">music • art • tech • nostalgia</p>
+        </header>
 
-    <div id="layout">
-      <aside id="sidebar">
-        <div class="profile-pic"></div>
+        <div id="layout">
 
-        <div class="about-box">
-          <h2>About Me</h2>
-          <p>Cloud student • Artist • Tech explorer</p>
+            <aside id="sidebar">
+                <div class="profile-pic"></div>
+
+                <div class="about-box">
+                    <h2>About Me</h2>
+                    <p>Cloud student • Artist • Tech explorer</p>
+                </div>
+
+                <div class="links-box">
+                    <h2>Hobbies</h2>
+                    <ul>
+                        <li>Music</li>
+                        <li>Art</li>
+                        <li>Tech</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main id="main-content">
+
+                <section id="skin-switcher">
+                    <h2>Choose Your Theme</h2>
+                    <button onclick="setSkin('style-classic.css')">Classic</button>
+                    <button onclick="setSkin('style-tron.css')">Tron</button>
+                    <button onclick="setSkin('style-barbie.css')">Barbie</button>
+                </section>
+
+                <section id="media-player">
+                    <div class="wmp-frame">
+
+                        <div class="wmp-titlebar">
+                            <span class="wmp-icon"></span>
+                            <span class="wmp-title">Now Playing</span>
+                        </div>
+
+                        <div class="wmp-display">
+                            <canvas id="visualizer"></canvas>
+                        </div>
+
+                        <div class="visualizer-mode-box">
+                            <select id="visualizer-mode"></select>
+                        </div>
+
+                    </div>
+                </section>
+
+            </main>
+
         </div>
 
-        <div class="links-box">
-          <h2>Hobbies</h2>
-          <ul>
-            <li>Music</li>
-            <li>Art</li>
-            <li>Tech</li>
-          </ul>
-        </div>
-      </aside>
-
-      <main id="main-content">
-
-        <section id="skin-switcher">
-          <h2>Choose Your Theme</h2>
-          <button onclick="setSkin('style.css')">Classic</button>
-          <button onclick="setSkin('style-tron.css')">Tron</button>
-          <button onclick="setSkin('style-barbie.css')">Barbie</button>
-        </section>
-
-        <section id="media-player">
-          <div class="wmp-frame">
-
-            <div class="wmp-titlebar">
-              <span class="wmp-icon"></span>
-              <span class="wmp-title">Now Playing</span>
-            </div>
-
-            <div class="wmp-display">
-              <canvas id="visualizer"></canvas>
-            </div>
-
-            <div class="visualizer-mode-box">
-              <select id="visualizer-mode">
-                <option value="wave">Waveform</option>
-                <option value="bars">Bars</option>
-                <option value="circle">Circle</option>
-                <option value="dots">Dots</option>
-              </select>
-            </div>
-
-            <audio id="audio-player" src="Daft Punk - Lose Yourself to Dance (Official Version).mp3"></audio>
-
-            <div class="wmp-track-info">
-              <span id="track-title">Track Title</span>
-              <span id="track-artist">Artist</span>
-            </div>
-
-            <div class="wmp-controls">
-              <button id="prev-btn" class="wmp-btn">⏮</button>
-              <button id="play-btn" class="wmp-btn">▶️</button>
-              <button id="pause-btn" class="wmp-btn">⏸</button>
-              <button id="next-btn" class="wmp-btn">⏭</button>
-              <button id="stop-btn" class="wmp-btn">⏹</button>
-              <button id="repeat-btn" class="wmp-btn">🔁</button>
-            </div>
-
-            <div class="wmp-seek">
-              <input type="range" id="seek-bar" min="0" max="100" value="0">
-            </div>
-
-            <div class="wmp-volume">
-              <input type="range" id="volume-bar" min="0" max="1" step="0.01">
-            </div>
-
-            <div class="wmp-status">
-              <span id="current-time">0:00</span>
-              <span id="duration">0:00</span>
-            </div>
-
-          </div>
-        </section>
-
-      </main>
     </div>
 
-    <footer id="footer">
-      <p>© 2026 Vincent Sanchez Retro Media Space</p>
-    </footer>
-
-  </div> 
-
-  <script>
-    function setSkin(file) {
-      document.getElementById("skinStylesheet").href = file + "?v=" + Date.now();
-    }
-  </script>
-
-  <script src="script.js?v=200"></script>
-  <script src="player.js?v=200"></script>
-  
+    <script src="player.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
