@@ -34,9 +34,9 @@ const playlist = [
     file: "Daft Punk - Lose Yourself to Dance (Official Version).mp3"
   },
   {
-    title: "Your Next Song",
-    artist: "Artist Name",
-    file: "song2.mp3"
+    title: "So Long, London",
+    artist: "Taylor Swift",
+    file: "Taylor Swift - So Long, London (Official Lyric Video).mp3"
   }
 ];
 
@@ -59,13 +59,34 @@ function loadTrack(index) {
 }
 
 /* ============================
+   AUDIO CONTEXT FIX
+   ============================ */
+
+const audioCtx = new AudioContext();
+const analyser = audioCtx.createAnalyser();
+
+let visualizerReady = false;
+
+function initVisualizer() {
+  if (visualizerReady) return;
+  visualizerReady = true;
+
+  const source = audioCtx.createMediaElementSource(audio);
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+}
+
+analyser.fftSize = 256;
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+/* ============================
    PLAYBACK CONTROLS
    ============================ */
 
 playBtn.addEventListener("click", () => {
-  if (audioCtx.state === "suspended") {
-    audioCtx.resume();
-  }
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  initVisualizer();
   audio.play();
 });
 
@@ -83,12 +104,18 @@ nextBtn.addEventListener("click", () => {
     currentTrack = (currentTrack + 1) % playlist.length;
   }
   loadTrack(currentTrack);
+
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  initVisualizer();
   audio.play();
 });
 
 prevBtn.addEventListener("click", () => {
   currentTrack = currentTrack === 0 ? playlist.length - 1 : currentTrack - 1;
   loadTrack(currentTrack);
+
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  initVisualizer();
   audio.play();
 });
 
@@ -109,6 +136,8 @@ repeatBtn.addEventListener("click", () => {
 
 audio.addEventListener("ended", () => {
   if (repeatMode === "one") {
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    initVisualizer();
     audio.play();
     return;
   }
@@ -125,6 +154,9 @@ audio.addEventListener("ended", () => {
   }
 
   loadTrack(currentTrack);
+
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  initVisualizer();
   audio.play();
 });
 
@@ -161,26 +193,6 @@ function formatTime(sec) {
   const s = Math.floor(sec % 60);
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
-
-/* ============================
-   VISUALIZER SETUP
-   ============================ */
-
-const audioCtx = new AudioContext();
-const analyser = audioCtx.createAnalyser();
-
-function initVisualizer() {
-  if (initVisualizer.done) return;
-  initVisualizer.done = true;
-
-  const source = audioCtx.createMediaElementSource(audio);
-  source.connect(analyser);
-  analyser.connect(audioCtx.destination);
-}
-
-analyser.fftSize = 256;
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
 
 /* ============================
    VISUALIZER DRAW LOOP
