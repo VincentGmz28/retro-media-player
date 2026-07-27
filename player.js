@@ -238,12 +238,10 @@ function drawWave() {
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
-    const v = dataArray[i] / 255;          // normalize 0–1
-    const y = v * canvas.height;           // full height movement
-
+    const v = dataArray[i] / 255;
+    const y = v * canvas.height;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
-
     x += slice;
   }
 
