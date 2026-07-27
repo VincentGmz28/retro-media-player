@@ -1,0 +1,80 @@
+/* ================================
+   WINDOWS MEDIA PLAYER 2003 THEME
+   ================================ */
+
+/* --- MAIN APP BACKGROUND --- */
+body {
+  background: linear-gradient(180deg, #0A1A2F, #1E3A5C);
+  color: #FFFFFF;
+  font-family: Tahoma, Verdana, sans-serif;
+}
+
+/* --- PLAYER PANEL --- */
+#player-container {
+  background: #0C1F33;
+  border: 2px solid #1E3A5C;
+  box-shadow: 0 0 12px #00101F inset;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+/* --- TITLE + ARTIST TEXT --- */
+#track-title {
+  color: #BBD4FF;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#track-artist {
+  color: #8FAED6;
+  font-size: 14px;
+}
+
+/* --- BUTTONS --- */
+button {
+  background: #1E3A5C;
+  border: 1px solid #00C8FF;
+  color: #FFFFFF;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: 0.15s ease;
+}
+
+button:hover {
+  background: #24466D;
+  box-shadow: 0 0 6px #00C8FF;
+}
+
+button:active {
+  background: #00C8FF;
+  color: #0A1A2F;
+}
+
+/* --- SLIDERS --- */
+input[type="range"] {
+  width: 100%;
+  background: #0C1F33;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background: #00C8FF;
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+}
+
+/* --- VISUALIZER CANVAS --- */
+#visualizer {
+  background: #0A1A2F;
+  border: 2px solid #1E3A5C;
+  box-shadow: 0 0 10px #00101F inset;
+}
+
+/* --- MODE DROPDOWN --- */
+#visualizer-mode {
+  background: #1E3A5C;
+  border: 1px solid #00C8FF;
+  color: #FFFFFF;
+  padding: 4px;
+  border-radius: 4px;
+}
