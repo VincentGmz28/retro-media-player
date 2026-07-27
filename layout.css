@@ -1,5 +1,5 @@
 /* ============================
-   LAYOUT — STRUCTURE ONLY
+   CLEAN LAYOUT — STRUCTURE ONLY
    ============================ */
 
 /* Page Wrapper */
@@ -39,11 +39,10 @@
    MEDIA PLAYER SIZING
    ============================ */
 
-/* WMP Frame */
 .wmp-frame {
   width: 100%;
-  max-width: 600px;     
-  min-height: 320px;   
+  max-width: 600px;     /* adjust */
+  min-height: 320px;    /* adjust */
   padding: 10px;
   box-sizing: border-box;
 }
