@@ -1,6 +1,6 @@
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-UTF-8">
     <title>Retro Media Space</title>
 
     <link rel="stylesheet" href="layout.css">
@@ -46,6 +46,7 @@
                     <button onclick="setSkin('style-barbie.css')">Barbie</button>
                 </section>
 
+                <!-- ⭐ WMP PLAYER — MATCHED TO player.js ⭐ -->
                 <section id="media-player">
                     <div class="wmp-frame">
 
@@ -62,17 +63,35 @@
                             <select id="visualizer-mode"></select>
                         </div>
 
+                        <!-- TRACK INFO (player.js expects these IDs) -->
+                        <div class="wmp-track-info">
+                            <span id="track-title">Track Title</span>
+                            <span id="track-artist">Artist</span>
+                        </div>
+
+                        <!-- SEEK + TIME -->
+                        <div class="wmp-seek">
+                            <input type="range" id="seek-bar" value="0" min="0" max="100">
+                            <div class="wmp-status">
+                                <span id="current-time">0:00</span>
+                                <span id="duration">0:00</span>
+                            </div>
+                        </div>
+
                         <div class="wmp-controls">
-                            <button class="wmp-btn play-btn">▶</button>
-                            <button class="wmp-btn pause-btn">⏸</button>
-                            <button class="wmp-btn stop-btn">⏹</button>
-                            <button class="wmp-btn next-btn">⏭</button>
+                            <button id="play-btn" class="wmp-btn">▶</button>
+                            <button id="pause-btn" class="wmp-btn">⏸</button>
+                            <button id="stop-btn" class="wmp-btn">⏹</button>
+                            <button id="next-btn" class="wmp-btn">⏭</button>
+                            <button id="prev-btn" class="wmp-btn">⏮</button>
+                            <button id="repeat-btn" class="wmp-btn">🔁</button>
                         </div>
 
                         <div class="wmp-volume">
-                            <button class="wmp-btn volume-down">🔉</button>
-                            <button class="wmp-btn volume-up">🔊</button>
+                            <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="1">
                         </div>
+
+                        <audio id="audio-player"></audio>
 
                     </div>
                 </section>
