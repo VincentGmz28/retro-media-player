@@ -51,14 +51,10 @@
   flex: 1;
 }
 
-/* ============================
-   MEDIA PLAYER — MYSPACE FRAME
-   ============================ */
-
 .wmp-frame {
   width: 100%;
-  max-width: 500px;
-  min-height: 320px;
+  max-width: 550px;
+  min-height: 180px;
   padding: 10px;
   border: 1px solid #ccc;
   background: #fff;
