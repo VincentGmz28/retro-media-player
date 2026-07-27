@@ -1,5 +1,5 @@
 /* ============================
-   RETRO MEDIA PLAYER — FULL UPGRADE
+   RETRO MEDIA PLAYER 
    ============================ */
 
 const audio = document.getElementById("audio-player");
@@ -122,9 +122,9 @@ audio.addEventListener("ended", () => {
   audio.play();
 });
 
-/* ============================
+/* ==============
    SEEK BAR
-   ============================ */
+   ==============*/
 
 audio.addEventListener("timeupdate", () => {
   seekBar.value = (audio.currentTime / audio.duration) * 100;
@@ -186,8 +186,8 @@ function draw() {
 
   if (mode === "bars") drawBars();
   else if (mode === "wave") drawWave();
-  else if (mode === "circle") drawCircle(); // now starfield
-  else if (mode === "dots") drawDots();
+  else if (mode === "circle") drawCircle(); // starfield
+  else if (mode === "dots") drawEnergyBliss(); // new mode
 }
 
 /* ============================
@@ -224,9 +224,9 @@ function drawWave() {
   ctx.stroke();
 }
 
-/* ============================
+/* =======================
    MODE: STARFIELD 
-   ============================ */
+   ======================= */
 
 function drawCircle() {
   ctx.fillStyle = "#FFFFFF";
@@ -247,21 +247,30 @@ function drawCircle() {
   ctx.globalAlpha = 1.0;
 }
 
-/* ============================
-   MODE: DOTS (Windows Gold)
-   ============================ */
+/* ======================
+   MODE: ENERGY BLISS 
+   ====================== */
 
-function drawDots() {
+function drawEnergyBliss() {
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+
   for (let i = 0; i < bufferLength; i++) {
-    const size = dataArray[i] / 10;
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
+    const radius = dataArray[i] * 0.4;
+    const angle = (i / bufferLength) * Math.PI * 2;
 
-    ctx.fillStyle = "#D9C97A";
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+
+    ctx.fillStyle = "#4AA3D8"; // soft aqua glow
+    ctx.globalAlpha = 0.7;
+
     ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.arc(x, y, 4, 0, Math.PI * 2);
     ctx.fill();
   }
+
+  ctx.globalAlpha = 1.0;
 }
 
 draw();
