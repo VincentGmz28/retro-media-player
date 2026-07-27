@@ -1,80 +1,105 @@
-/* ================================
-   WINDOWS MEDIA PLAYER 2003 THEME
-   ================================ */
+/* Classic Theme - Clean and Simple */
 
-/* --- MAIN APP BACKGROUND --- */
 body {
-  background: linear-gradient(180deg, #0A1A2F, #1E3A5C);
-  color: #FFFFFF;
-  font-family: Tahoma, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #000; /* FIX: readable text */
+    font-family: Arial, sans-serif;
 }
 
-/* --- PLAYER PANEL --- */
-#player-container {
-  background: #0C1F33;
-  border: 2px solid #1E3A5C;
-  box-shadow: 0 0 12px #00101F inset;
-  padding: 12px;
-  border-radius: 6px;
+#profile-header {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #999;
 }
 
-/* --- TITLE + ARTIST TEXT --- */
-#track-title {
-  color: #BBD4FF;
-  font-size: 18px;
-  font-weight: bold;
+#profile-header h1 {
+    font-size: 2.2em;
 }
 
-#track-artist {
-  color: #8FAED6;
-  font-size: 14px;
+#profile-header .tagline {
+    font-size: 1.1em;
+    font-style: italic;
 }
 
-/* --- BUTTONS --- */
+#sidebar {
+    background-color: #e8e8e8;
+    border-right: 2px solid #999;
+    padding: 20px;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 200px;
+    background-color: #dcdcdc;
+    border: 2px solid #999;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.about-box, .links-box {
+    background-color: #f0f0f0;
+    border: 2px solid #999;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.about-box h2, .links-box h2 {
+    color: #333;
+}
+
+#main-content {
+    padding: 20px;
+}
+
+#skin-switcher h2 {
+    color: #333;
+}
+
 button {
-  background: #1E3A5C;
-  border: 1px solid #00C8FF;
-  color: #FFFFFF;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: 0.15s ease;
+    background-color: #dcdcdc;
+    color: #000;
+    border: 1px solid #888;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 button:hover {
-  background: #24466D;
-  box-shadow: 0 0 6px #00C8FF;
+    background-color: #c8c8c8;
 }
 
-button:active {
-  background: #00C8FF;
-  color: #0A1A2F;
+.wmp-frame {
+    background-color: #e8e8e8;
+    border: 2px solid #999;
+    border-radius: 10px;
+    padding: 20px;
 }
 
-/* --- SLIDERS --- */
-input[type="range"] {
-  width: 100%;
-  background: #0C1F33;
+.wmp-titlebar {
+    background-color: #dcdcdc;
+    color: #333;
+    padding: 10px;
+    border-bottom: 2px solid #999;
+    border-radius: 10px 10px 0 0;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  background: #00C8FF;
-  border-radius: 50%;
-  height: 14px;
-  width: 14px;
+.wmp-display {
+    background-color: #f0f0f0;
+    border: 2px solid #999;
+    height: 200px;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
-/* --- VISUALIZER CANVAS --- */
-#visualizer {
-  background: #0A1A2F;
-  border: 2px solid #1E3A5C;
-  box-shadow: 0 0 10px #00101F inset;
-}
-
-/* --- MODE DROPDOWN --- */
-#visualizer-mode {
-  background: #1E3A5C;
-  border: 1px solid #00C8FF;
-  color: #FFFFFF;
-  padding: 4px;
-  border-radius: 4px;
+.visualizer-mode-box select {
+    background-color: #dcdcdc;
+    color: #000;
+    border: 1px solid #888;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
 }
