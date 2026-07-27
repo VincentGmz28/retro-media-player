@@ -19,8 +19,8 @@ const visualizerMode = document.getElementById("visualizer-mode");
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 900;
-canvas.height = 300;
+canvas.width = 600;
+canvas.height = 200;
 
 const playlist = [
   {
@@ -234,12 +234,12 @@ function drawBars() {
   bass = bass / (bufferLength / 4);
   const bassScale = 0.8 + bass * 0.003;
 
-  const barWidth = (canvas.width / bufferLength) * 0.8;
+  const barWidth = (canvas.width / bufferLength) * 1;
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
     const v = dataArray[i];
-    const barHeight = v * bassScale;
+    const barHeight = v * bassScale * 0.5;
     ctx.fillStyle = "hsl(200, 90%, 60%)";
     ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
     x += barWidth;
@@ -247,17 +247,17 @@ function drawBars() {
 }
 
 function drawWave() {
-  analyser.getByteTimeDomainData(dataArray);
+  analyser.getByteFrequencyData(dataArray);
   ctx.beginPath();
-  ctx.lineWidth = 3;
+  ctx.lineWidth = 4;
   ctx.strokeStyle = get2006Color(0.8);
 
   const slice = canvas.width / bufferLength;
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
-    const v = dataArray[i] / 255;
-    const y = canvas.height / 2 + (v - 0.5) * 45;
+    const v = dataArray[i] / 128;
+    const y = canvas.height / 2 + (v - 0.5) * 20;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
     x += slice;
