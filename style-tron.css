@@ -1,0 +1,91 @@
+/* ================================
+   TRON LEGACY NEON THEME PRESET
+   ================================ */
+
+/* --- GLOBAL --- */
+body {
+  background: radial-gradient(circle at center, #001018 0%, #000000 70%);
+  color: #7DF9FF;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+}
+
+/* --- PLAYER PANEL --- */
+#player-container {
+  background: rgba(0, 10, 20, 0.85);
+  border: 2px solid #00E5FF;
+  box-shadow:
+    0 0 20px #00E5FF inset,
+    0 0 12px #00E5FF;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+/* --- TRACK INFO --- */
+#track-title {
+  color: #00E5FF;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 8px #00E5FF;
+}
+
+#track-artist {
+  color: #7DF9FF;
+  font-size: 14px;
+  text-shadow: 0 0 6px #00E5FF;
+}
+
+/* --- BUTTONS --- */
+button {
+  background: rgba(0, 20, 30, 0.9);
+  border: 2px solid #00E5FF;
+  color: #7DF9FF;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: 0.15s ease;
+  text-shadow: 0 0 6px #00E5FF;
+}
+
+button:hover {
+  background: rgba(0, 40, 60, 0.9);
+  box-shadow: 0 0 12px #00E5FF;
+}
+
+button:active {
+  background: #00E5FF;
+  color: #001018;
+  text-shadow: none;
+}
+
+/* --- SLIDERS --- */
+input[type="range"] {
+  width: 100%;
+  background: #001018;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background: #00E5FF;
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+  box-shadow: 0 0 10px #00E5FF;
+}
+
+/* --- VISUALIZER CANVAS --- */
+#visualizer {
+  background: #000000;
+  border: 2px solid #00E5FF;
+  box-shadow:
+    0 0 20px #00E5FF inset,
+    0 0 12px #00E5FF;
+}
+
+/* --- MODE DROPDOWN --- */
+#visualizer-mode {
+  background: rgba(0, 20, 30, 0.9);
+  border: 2px solid #00E5FF;
+  color: #7DF9FF;
+  padding: 6px;
+  border-radius: 6px;
+  text-shadow: 0 0 6px #00E5FF;
+}
