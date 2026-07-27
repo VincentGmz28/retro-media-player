@@ -23,6 +23,10 @@ const visualizerMode = document.getElementById("visualizer-mode");
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
 
+/* ⭐ Canvas size handled here */
+canvas.width = 600;
+canvas.height = 200;
+
 /* ============================
    PLAYLIST SYSTEM
    ============================ */
@@ -59,7 +63,7 @@ function loadTrack(index) {
 }
 
 /* ============================
-   AUDIO CONTEXT FIX
+   AUDIO + VISUALIZER SETUP
    ============================ */
 
 const audioCtx = new AudioContext();
@@ -84,12 +88,13 @@ const dataArray = new Uint8Array(bufferLength);
    PLAYBACK CONTROLS
    ============================ */
 
-playBtn.addEventListener("click", () => {
+function startAudio() {
   if (audioCtx.state === "suspended") audioCtx.resume();
   initVisualizer();
   audio.play();
-});
+}
 
+playBtn.addEventListener("click", startAudio);
 pauseBtn.addEventListener("click", () => audio.pause());
 
 stopBtn.addEventListener("click", () => {
@@ -98,26 +103,20 @@ stopBtn.addEventListener("click", () => {
 });
 
 nextBtn.addEventListener("click", () => {
-  if (shuffle) {
-    currentTrack = Math.floor(Math.random() * playlist.length);
-  } else {
-    currentTrack = (currentTrack + 1) % playlist.length;
-  }
+  currentTrack = (currentTrack + 1) % playlist.length;
   loadTrack(currentTrack);
-
-  if (audioCtx.state === "suspended") audioCtx.resume();
-  initVisualizer();
-  audio.play();
+  startAudio();
 });
 
 prevBtn.addEventListener("click", () => {
   currentTrack = currentTrack === 0 ? playlist.length - 1 : currentTrack - 1;
   loadTrack(currentTrack);
-
-  if (audioCtx.state === "suspended") audioCtx.resume();
-  initVisualizer();
-  audio.play();
+  startAudio();
 });
+
+/* ============================
+   REPEAT MODE
+   ============================ */
 
 repeatBtn.addEventListener("click", () => {
   if (repeatMode === "none") repeatMode = "one";
@@ -136,17 +135,11 @@ repeatBtn.addEventListener("click", () => {
 
 audio.addEventListener("ended", () => {
   if (repeatMode === "one") {
-    if (audioCtx.state === "suspended") audioCtx.resume();
-    initVisualizer();
-    audio.play();
+    startAudio();
     return;
   }
 
-  if (shuffle) {
-    currentTrack = Math.floor(Math.random() * playlist.length);
-  } else {
-    currentTrack++;
-  }
+  currentTrack++;
 
   if (currentTrack >= playlist.length) {
     if (repeatMode === "all") currentTrack = 0;
@@ -154,15 +147,12 @@ audio.addEventListener("ended", () => {
   }
 
   loadTrack(currentTrack);
-
-  if (audioCtx.state === "suspended") audioCtx.resume();
-  initVisualizer();
-  audio.play();
+  startAudio();
 });
 
-/* ==============
+/* ============================
    SEEK BAR
-   ==============*/
+   ============================ */
 
 audio.addEventListener("timeupdate", () => {
   seekBar.value = (audio.currentTime / audio.duration) * 100;
@@ -247,9 +237,9 @@ function drawWave() {
   ctx.stroke();
 }
 
-/* =======================
+/* ============================
    MODE: STARFIELD
-   ======================= */
+   ============================ */
 
 function drawCircle() {
   ctx.fillStyle = "#FFFFFF";
@@ -270,9 +260,9 @@ function drawCircle() {
   ctx.globalAlpha = 1.0;
 }
 
-/* ======================
+/* ============================
    MODE: ENERGY BLISS
-   ====================== */
+   ============================ */
 
 function drawEnergyBliss() {
   const centerX = canvas.width / 2;
