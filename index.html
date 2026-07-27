@@ -1,11 +1,9 @@
 <html>
 <head>
-    <meta charset="UTF-UTF-8">
+    <meta charset="UTF-8">
     <title>Retro Media Space</title>
 
     <link rel="stylesheet" href="layout.css">
-
-    <!-- Theme stylesheet -->
     <link id="skinStylesheet" rel="stylesheet" href="style-classic.css">
 </head>
 
@@ -46,7 +44,6 @@
                     <button onclick="setSkin('style-barbie.css')">Barbie</button>
                 </section>
 
-                <!-- ⭐ WMP PLAYER — MATCHED TO player.js ⭐ -->
                 <section id="media-player">
                     <div class="wmp-frame">
 
@@ -63,13 +60,11 @@
                             <select id="visualizer-mode"></select>
                         </div>
 
-                        <!-- TRACK INFO (player.js expects these IDs) -->
                         <div class="wmp-track-info">
                             <span id="track-title">Track Title</span>
                             <span id="track-artist">Artist</span>
                         </div>
 
-                        <!-- SEEK + TIME -->
                         <div class="wmp-seek">
                             <input type="range" id="seek-bar" value="0" min="0" max="100">
                             <div class="wmp-status">
