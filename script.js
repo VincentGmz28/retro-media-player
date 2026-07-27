@@ -1,20 +1,19 @@
-const skinStylesheet = document.getElementById("skinStylesheet");
-
-function setSkin(file) {
-  if (!skinStylesheet) return;
-  skinStylesheet.href = `${file}?v=${Date.now()}`;
-  saveTheme(file);
+// Theme switching
+function setSkin(skinFile) {
+    document.getElementById("skinStylesheet").href = skinFile;
 }
 
-function saveTheme(themeFile) {
-  localStorage.setItem("retroTheme", themeFile);
-}
+// Visualizer mode switching
+const visualizerModeSelect = document.getElementById("visualizer-mode");
+const visualizerModes = ["Bars", "Wave", "Circle", "Dots"];
 
-function loadSavedTheme() {
-  const saved = localStorage.getItem("retroTheme");
-  if (saved) {
-    skinStylesheet.href = `${saved}?v=${Date.now()}`;
-  }
-}
+visualizerModes.forEach(mode => {
+    const option = document.createElement("option");
+    option.value = mode;
+    option.textContent = mode;
+    visualizerModeSelect.appendChild(option);
+});
 
-loadSavedTheme();
+visualizerModeSelect.addEventListener("change", () => {
+    console.log("Visualizer mode changed to:", visualizerModeSelect.value);
+});
