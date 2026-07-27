@@ -53,8 +53,8 @@
 
 .wmp-frame {
   width: 100%;
-  max-width: 550px;
-  min-height: 180px;
+  max-width: 600px;
+  min-height: 200px;
   padding: 10px;
   border: 1px solid #ccc;
   background: #fff;
