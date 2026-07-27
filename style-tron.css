@@ -1,91 +1,109 @@
-/* ================================
-   TRON LEGACY NEON THEME PRESET
-   ================================ */
+/* TRON Legacy Neon Theme */
 
-/* --- GLOBAL --- */
 body {
-  background: radial-gradient(circle at center, #001018 0%, #000000 70%);
-  color: #7DF9FF;
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+    background-color: #000000;
+    color: #0ff; /* FIX: readable neon text */
+    font-family: "Orbitron", sans-serif;
 }
 
-/* --- PLAYER PANEL --- */
-#player-container {
-  background: rgba(0, 10, 20, 0.85);
-  border: 2px solid #00E5FF;
-  box-shadow:
-    0 0 20px #00E5FF inset,
-    0 0 12px #00E5FF;
-  padding: 14px;
-  border-radius: 8px;
+#profile-header {
+    background: linear-gradient(135deg, #001f21, #003b40);
+    color: #0ff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #0ff;
 }
 
-/* --- TRACK INFO --- */
-#track-title {
-  color: #00E5FF;
-  font-size: 20px;
-  font-weight: bold;
-  text-shadow: 0 0 8px #00E5FF;
+#profile-header h1 {
+    font-size: 2.5em;
+    text-shadow: 0 0 10px #0ff;
 }
 
-#track-artist {
-  color: #7DF9FF;
-  font-size: 14px;
-  text-shadow: 0 0 6px #00E5FF;
+#profile-header .tagline {
+    font-size: 1.2em;
+    font-style: italic;
 }
 
-/* --- BUTTONS --- */
+#sidebar {
+    background-color: #001f21;
+    border-right: 3px solid #0ff;
+    padding: 20px;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 200px;
+    background-color: #003b40;
+    border: 3px solid #0ff;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.about-box, .links-box {
+    background-color: #002a2d;
+    border: 3px solid #0ff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.about-box h2, .links-box h2 {
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff;
+}
+
+#main-content {
+    padding: 20px;
+}
+
+#skin-switcher h2 {
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff;
+}
+
 button {
-  background: rgba(0, 20, 30, 0.9);
-  border: 2px solid #00E5FF;
-  color: #7DF9FF;
-  padding: 6px 14px;
-  border-radius: 6px;
-  transition: 0.15s ease;
-  text-shadow: 0 0 6px #00E5FF;
+    background-color: #003b40;
+    color: #0ff;
+    border: 2px solid #0ff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 button:hover {
-  background: rgba(0, 40, 60, 0.9);
-  box-shadow: 0 0 12px #00E5FF;
+    background-color: #00545a;
 }
 
-button:active {
-  background: #00E5FF;
-  color: #001018;
-  text-shadow: none;
+.wmp-frame {
+    background-color: #001f21;
+    border: 3px solid #0ff;
+    border-radius: 15px;
+    padding: 20px;
 }
 
-/* --- SLIDERS --- */
-input[type="range"] {
-  width: 100%;
-  background: #001018;
+.wmp-titlebar {
+    background-color: #003b40;
+    color: #0ff;
+    padding: 10px;
+    border-bottom: 3px solid #0ff;
+    border-radius: 10px 10px 0 0;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  background: #00E5FF;
-  border-radius: 50%;
-  height: 16px;
-  width: 16px;
-  box-shadow: 0 0 10px #00E5FF;
+.wmp-display {
+    background-color: #002a2d;
+    border: 3px solid #0ff;
+    height: 200px;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
-/* --- VISUALIZER CANVAS --- */
-#visualizer {
-  background: #000000;
-  border: 2px solid #00E5FF;
-  box-shadow:
-    0 0 20px #00E5FF inset,
-    0 0 12px #00E5FF;
-}
-
-/* --- MODE DROPDOWN --- */
-#visualizer-mode {
-  background: rgba(0, 20, 30, 0.9);
-  border: 2px solid #00E5FF;
-  color: #7DF9FF;
-  padding: 6px;
-  border-radius: 6px;
-  text-shadow: 0 0 6px #00E5FF;
+.visualizer-mode-box select {
+    background-color: #003b40;
+    color: #0ff;
+    border: 2px solid #0ff;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
 }
