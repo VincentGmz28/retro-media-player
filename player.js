@@ -41,7 +41,7 @@ const playlist = [
 ];
 
 let currentTrack = 0;
-let repeatMode = "none"; // none, one, all
+let repeatMode = "none";
 let shuffle = false;
 
 /* ============================
@@ -91,7 +91,10 @@ repeatBtn.addEventListener("click", () => {
   else if (repeatMode === "one") repeatMode = "all";
   else repeatMode = "none";
 
-  repeatBtn.textContent = repeatMode === "one" ? "🔂" : repeatMode === "all" ? "🔁" : "🔁";
+  repeatBtn.textContent =
+    repeatMode === "one" ? "🔂" :
+    repeatMode === "all" ? "🔁" :
+    "🔁";
 });
 
 /* ============================
@@ -183,23 +186,31 @@ function draw() {
 
   if (mode === "bars") drawBars();
   else if (mode === "wave") drawWave();
-  else if (mode === "circle") drawCircle();
+  else if (mode === "circle") drawCircle(); // now starfield
   else if (mode === "dots") drawDots();
 }
+
+/* ============================
+   MODE: BARS (Windows 2000 Blue)
+   ============================ */
 
 function drawBars() {
   const barWidth = canvas.width / bufferLength;
   for (let i = 0; i < bufferLength; i++) {
     const barHeight = dataArray[i];
-    ctx.fillStyle = "#00aaff";
+    ctx.fillStyle = "#3A6EA5";
     ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth, barHeight);
   }
 }
 
+/* ============================
+   MODE: WAVE (Calm Aqua)
+   ============================ */
+
 function drawWave() {
   ctx.beginPath();
   ctx.lineWidth = 2;
-  ctx.strokeStyle = "#00ff88";
+  ctx.strokeStyle = "#4AA3D8";
 
   const slice = canvas.width / bufferLength;
   let x = 0;
@@ -213,14 +224,32 @@ function drawWave() {
   ctx.stroke();
 }
 
+/* ============================
+   MODE: STARFIELD 
+   ============================ */
+
 function drawCircle() {
-  const radius = Math.max(40, dataArray[10]);
-  ctx.beginPath();
-  ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
-  ctx.strokeStyle = "#ff44aa";
-  ctx.lineWidth = 4;
-  ctx.stroke();
+  ctx.fillStyle = "#FFFFFF";
+  ctx.globalAlpha = 0.8;
+
+  const starCount = 80;
+
+  for (let i = 0; i < starCount; i++) {
+    const size = (dataArray[i % bufferLength] / 255) * 3;
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.globalAlpha = 1.0;
 }
+
+/* ============================
+   MODE: DOTS (Windows Gold)
+   ============================ */
 
 function drawDots() {
   for (let i = 0; i < bufferLength; i++) {
@@ -228,7 +257,7 @@ function drawDots() {
     const x = Math.random() * canvas.width;
     const y = Math.random() * canvas.height;
 
-    ctx.fillStyle = "#ffaa00";
+    ctx.fillStyle = "#D9C97A";
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.fill();
