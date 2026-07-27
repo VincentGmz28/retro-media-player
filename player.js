@@ -19,8 +19,8 @@ const visualizerMode = document.getElementById("visualizer-mode");
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 600;
-canvas.height = 200;
+canvas.width = 900;
+canvas.height = 300;
 
 const playlist = [
   {
@@ -234,7 +234,7 @@ function drawBars() {
   bass = bass / (bufferLength / 4);
   const bassScale = 0.8 + bass * 0.003;
 
-  const barWidth = (canvas.width / bufferLength) * 1;
+  const barWidth = (canvas.width / bufferLength) * 0.8;
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
@@ -257,7 +257,7 @@ function drawWave() {
 
   for (let i = 0; i < bufferLength; i++) {
     const v = dataArray[i] / 255;
-    const y = canvas.height / 2 + (v - 0.2) * 80;
+    const y = canvas.height / 2 + (v - 0.5) * 45;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
     x += slice;
