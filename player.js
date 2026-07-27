@@ -258,8 +258,8 @@ function drawWave() {
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
-    const v = (dataArray[i] / 255); * 1.4;
-    const y = canvas.height / 2 + (v - 0.5) * 45;
+    const v = (dataArray[i] / 255); * 1.25;
+    const y = canvas.height / 2 + (v - 0.5) * 60;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
     x += slice;
