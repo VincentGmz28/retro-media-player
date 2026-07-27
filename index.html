@@ -3,10 +3,8 @@
   <meta charset="UTF-8">
   <title>Retro Media Space</title>
 
-  <!-- Base layout -->
   <link rel="stylesheet" href="layout.css">
 
-  <!-- Theme stylesheet (switches dynamically) -->
   <link id="skinStylesheet" rel="stylesheet" href="style.css">
 </head>
 
@@ -39,7 +37,6 @@
 
       <main id="main-content">
 
-        <!-- Theme Switcher -->
         <section id="skin-switcher">
           <h2>Choose Your Theme</h2>
           <button onclick="setSkin('style.css')">Classic</button>
@@ -47,7 +44,6 @@
           <button onclick="setSkin('style-barbie.css')">Barbie</button>
         </section>
 
-        <!-- Retro WMP Player -->
         <section id="media-player">
           <div class="wmp-frame">
 
@@ -56,12 +52,10 @@
               <span class="wmp-title">Now Playing</span>
             </div>
 
-            <!-- ⭐ Visualizer gets full height now -->
             <div class="wmp-display">
               <canvas id="visualizer"></canvas>
             </div>
 
-            <!-- ⭐ Moved OUTSIDE the display so it doesn't steal height -->
             <div class="visualizer-mode-box">
               <select id="visualizer-mode">
                 <option value="wave">Waveform</option>
@@ -71,7 +65,6 @@
               </select>
             </div>
 
-            <!-- ⭐ Moved OUTSIDE the display -->
             <audio id="audio-player" src="Daft Punk - Lose Yourself to Dance (Official Version).mp3"></audio>
 
             <div class="wmp-track-info">
