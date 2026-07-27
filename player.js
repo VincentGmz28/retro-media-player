@@ -189,9 +189,9 @@ function formatTime(sec) {
 
 let hue = 0;
 
-function get2006Color(alpha =1) {
-   hue = (hue + 0.5) % 360; 
-   return 'hsla(${hue}, 80%, 60%, ${alpha})';
+function get2006Color(alpha = 1) {
+  hue = (hue + 0.5) % 360;
+  return `hsla(${hue}, 80%, 60%, ${alpha})`;
 }
 
 /* ============================
@@ -202,17 +202,17 @@ function draw() {
   requestAnimationFrame(draw);
 
   analyser.getByteFrequencyData(dataArray);
-   
-const mode = visualizerMode.value;
+
+  const mode = visualizerMode.value;
 
   if (mode === "bars") {
-    ctx.fillStyle = "#0A0A0A"; // dark grey
+    ctx.fillStyle = "#0A0A0A";
   } else if (mode === "wave") {
-    ctx.fillStyle = "#001122"; // deep blue
+    ctx.fillStyle = "#001122";
   } else if (mode === "circle") {
-    ctx.fillStyle = "#000000"; // black (starfield)
+    ctx.fillStyle = "#000000";
   } else if (mode === "dots") {
-    ctx.fillStyle = "#120012"; // purple tint
+    ctx.fillStyle = "#120012";
   }
 
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -231,7 +231,7 @@ function drawBars() {
   const barWidth = canvas.width / bufferLength;
   for (let i = 0; i < bufferLength; i++) {
     const barHeight = dataArray[i];
-    ctx.fillStyle = "get2006Color";
+    ctx.fillStyle = get2006Color();
     ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth, barHeight);
   }
 }
@@ -261,7 +261,6 @@ function drawWave() {
     return;
   }
 
-  // Normal animated wave
   ctx.beginPath();
   ctx.lineWidth = 3;
   ctx.strokeStyle = get2006Color();
@@ -270,7 +269,6 @@ function drawWave() {
   const slice = canvas.width / (bufferLength - 1);
   let x = 0;
 
-  // Bass detection
   let bass = 0;
   for (let i = 0; i < bufferLength / 4; i++) {
     bass += dataArray[i];
@@ -291,7 +289,7 @@ function drawWave() {
 }
 
 /* ============================
-   MODE: STARFIELD (WMP Style)
+   MODE: STARFIELD
    ============================ */
 
 let stars = [];
@@ -313,19 +311,26 @@ function initStars() {
 initStars();
 
 function drawCircle() {
-  if (audio.paused) return;
+  if (audio.paused) {
+    ctx.fillStyle = get2006Color();
+    for (let star of stars) {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    return;
+  }
 
   let bass = 0;
   for (let i = 0; i < bufferLength / 4; i++) bass += dataArray[i];
   bass = bass / (bufferLength / 4);
-  const bassBoost = bass * 0.02; // star speed boost
+  const bassBoost = bass * 0.02;
 
-  ctx.fillStyle = "get2006Color";
+  ctx.fillStyle = get2006Color();
 
   for (let star of stars) {
-
-    star.x += Math.cos(star.angle) * (star.speed * 0.3 + bassBoost * 0.4);
-    star.y += Math.sin(star.angle) * (star.speed * 0.3 + bassBoost * 0.4);
+    star.x += Math.cos(star.angle) * (star.speed * 0.2 + bassBoost * 0.2);
+    star.y += Math.sin(star.angle) * (star.speed * 0.2 + bassBoost * 0.2);
 
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
@@ -359,7 +364,7 @@ function drawEnergyBliss() {
     const x = centerX + Math.cos(angle) * radius;
     const y = centerY + Math.sin(angle) * radius;
 
-    ctx.fillStyle = "get2006Color(0.7)";
+    ctx.fillStyle = get2006Color(0.7);
     ctx.globalAlpha = 0.7;
 
     ctx.beginPath();
