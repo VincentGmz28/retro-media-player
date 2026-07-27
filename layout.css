@@ -1,5 +1,5 @@
 /* ============================
-   CLEAN LAYOUT — STRUCTURE ONLY
+   MYSPACE-STYLE STRUCTURE LAYOUT
    ============================ */
 
 /* Page Wrapper */
@@ -8,6 +8,7 @@
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
 /* Main Layout */
@@ -20,14 +21,29 @@
 #sidebar {
   width: 260px;
   padding: 15px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
 }
 
 /* Profile Pic */
 .profile-pic {
   width: 100%;
   height: 180px;
-  display: block;
+  background: #ddd;
+  border: 1px solid #bbb;
   margin-bottom: 15px;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+}
+
+/* Sidebar Modules */
+.about-box,
+.links-box {
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
 }
 
 /* Main Content */
@@ -36,7 +52,7 @@
 }
 
 /* ============================
-   MEDIA PLAYER STRUCTURE
+   MEDIA PLAYER — MYSPACE FRAME
    ============================ */
 
 .wmp-frame {
@@ -44,7 +60,9 @@
   max-width: 600px;
   min-height: 320px;
   padding: 10px;
-  box-sizing: border-box;
+  border: 1px solid #ccc;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
 }
 
 /* Title Bar */
@@ -53,21 +71,27 @@
   align-items: center;
   gap: 10px;
   padding: 6px 10px;
+  border-bottom: 1px solid #ccc;
+  background: linear-gradient(#fdfdfd, #f2f2f2);
 }
 
 /* Icon */
 .wmp-icon {
   width: 20px;
   height: 20px;
-  display: block;
+  background: #ddd;
+  border: 1px solid #bbb;
 }
 
 /* Visualizer Display Box */
 .wmp-display {
   width: 100%;
-  height: 240px; /* REQUIRED for visualizer to show */
+  height: 240px;
   position: relative;
   overflow: hidden;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
 }
 
 /* Canvas */
@@ -82,6 +106,8 @@
   padding: 6px 10px;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
 /* Controls */
@@ -100,6 +126,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
 }
 
 /* Seek + Volume */
@@ -118,6 +146,7 @@
   padding: 6px 10px;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid #ccc;
 }
 
 /* Footer */
@@ -125,4 +154,5 @@
   margin-top: 20px;
   padding: 10px;
   text-align: center;
+  border-top: 1px solid #ccc;
 }
