@@ -1,74 +1,113 @@
-/* ====== GLOBAL PAGE STRUCTURE ====== */
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+/* ===== PAGE WRAPPER ===== */
+#page-wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
-/* ====== MAIN CONTENT WRAPPER ====== */
+/* ===== HEADER ===== */
+#profile-header {
+    text-align: center;
+    padding: 20px 0;
+}
 
-.main-wrapper {
+#profile-header h1 {
+    margin: 0;
+}
+
+#profile-header .tagline {
+    margin: 5px 0 0 0;
+}
+
+/* ===== MAIN LAYOUT ===== */
+#layout {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     gap: 20px;
     padding: 20px;
 }
 
-/* ====== LEFT SIDEBAR ====== */
-
-.sidebar {
+/* ===== SIDEBAR ===== */
+#sidebar {
     width: 30%;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* ====== RIGHT CONTENT AREA ====== */
+.about-box,
+.links-box {
+    padding: 15px;
+}
 
-.content-area {
+/* ===== MAIN CONTENT ===== */
+#main-content {
     width: 70%;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* ====== THEME SELECTOR ====== */
-
-.theme-selector {
+/* ===== THEME SWITCHER ===== */
+#skin-switcher {
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    justify-content: flex-start;
 }
 
-/* ====== MEDIA PLAYER LAYOUT ====== */
+#skin-switcher button {
+    padding: 8px 12px;
+    cursor: pointer;
+}
 
-.player {
+/* ===== MEDIA PLAYER FRAME ===== */
+.wmp-frame {
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding: 20px;
 }
 
-.player-controls {
+.wmp-titlebar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 10px;
 }
 
-.progress-bar {
-    width: 100%;
+.wmp-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* ====== FOOTER ====== */
+.wmp-track-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
-.footer {
-    margin-top: auto;
+.wmp-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.wmp-seek,
+.wmp-volume {
+    display: flex;
+    justify-content: center;
+}
+
+.wmp-status {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ===== FOOTER ===== */
+#footer {
     text-align: center;
     padding: 10px 0;
+    margin-top: auto;
 }
