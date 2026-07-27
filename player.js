@@ -37,7 +37,6 @@ const playlist = [
 
 let currentTrack = 0;
 let repeatMode = "none";
-let shuffle = false;
 
 function loadTrack(index) {
   const track = playlist[index];
@@ -47,7 +46,7 @@ function loadTrack(index) {
   audio.load();
 }
 
-const audioCtx = new AudioContext();
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const analyser = audioCtx.createAnalyser();
 
 let visualizerReady = false;
@@ -55,24 +54,28 @@ let visualizerReady = false;
 function initVisualizer() {
   if (visualizerReady) return;
   visualizerReady = true;
+
   const source = audioCtx.createMediaElementSource(audio);
   source.connect(analyser);
   analyser.connect(audioCtx.destination);
 }
+
+window.addEventListener("click", () => {
+  if (audioCtx.state === "suspended") audioCtx.resume();
+});
 
 analyser.fftSize = 256;
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
 
 function startAudio() {
-  if (audioCtx.state === "suspended") audioCtx.resume();
+  audioCtx.resume();
   initVisualizer();
   audio.play();
 }
 
 playBtn.addEventListener("click", startAudio);
 pauseBtn.addEventListener("click", () => audio.pause());
-
 stopBtn.addEventListener("click", () => {
   audio.pause();
   audio.currentTime = 0;
@@ -91,9 +94,11 @@ prevBtn.addEventListener("click", () => {
 });
 
 repeatBtn.addEventListener("click", () => {
-  if (repeatMode === "none") repeatMode = "one";
-  else if (repeatMode === "one") repeatMode = "all";
-  else repeatMode = "none";
+  repeatMode =
+    repeatMode === "none" ? "one" :
+    repeatMode === "one" ? "all" :
+    "none";
+
   repeatBtn.textContent =
     repeatMode === "one" ? "🔂" :
     repeatMode === "all" ? "🔁" :
@@ -115,12 +120,15 @@ audio.addEventListener("ended", () => {
 });
 
 audio.addEventListener("timeupdate", () => {
+  if (!audio.duration || isNaN(audio.duration)) return;
+
   seekBar.value = (audio.currentTime / audio.duration) * 100;
   currentTimeEl.textContent = formatTime(audio.currentTime);
   durationEl.textContent = formatTime(audio.duration);
 });
 
 seekBar.addEventListener("input", () => {
+  if (!audio.duration || isNaN(audio.duration)) return;
   audio.currentTime = (seekBar.value / 100) * audio.duration;
 });
 
@@ -136,7 +144,6 @@ function formatTime(sec) {
 }
 
 let hue = 0;
-
 function get2006Color(alpha = 1) {
   hue = (hue + 0.5) % 360;
   return `hsla(${hue}, 80%, 60%, ${alpha})`;
@@ -247,7 +254,7 @@ function drawBars() {
 }
 
 function drawWave() {
-  if (audio.currentTime === 0) return;
+  if (audio.paused) return;
 
   analyser.getByteFrequencyData(dataArray);
   ctx.beginPath();
