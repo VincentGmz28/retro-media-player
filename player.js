@@ -234,7 +234,7 @@ function drawBars() {
   bass = bass / (bufferLength / 4);
   const bassScale = 0.8 + bass * 0.003;
 
-  const barWidth = (canvas.width / bufferLength) * 1;
+  const barWidth = (canvas.width / bufferLength) * 2;
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
@@ -247,17 +247,19 @@ function drawBars() {
 }
 
 function drawWave() {
+  if (audio.currentTime === 0) return;
+
   analyser.getByteFrequencyData(dataArray);
   ctx.beginPath();
   ctx.lineWidth = 4;
   ctx.strokeStyle = get2006Color(0.8);
 
-  const slice = canvas.width / bufferLength;
+  const slice = (canvas.width / bufferLength) * 3;
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
-    const v = dataArray[i] / 128;
-    const y = canvas.height / 2 + (v - 0.5) * 20;
+    const v = dataArray[i] / 255;
+    const y = canvas.height / 2 + (v - 0.5) * 35;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
     x += slice;
@@ -275,7 +277,6 @@ function drawCircle() {
   ctx.fillStyle = "rgba(255,255,255,0.9)";
   ctx.shadowColor = "white";
   ctx.shadowBlur = 8;
-
 
   if (audio.paused) {
     for (const star of stars) {
