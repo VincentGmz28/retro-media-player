@@ -2,7 +2,7 @@
 
 body {
     background-color: #f4f4f4;
-    color: #000; /* FIX: readable text */
+    color: #000;
     font-family: Arial, sans-serif;
 }
 
@@ -70,36 +70,4 @@ button {
 
 button:hover {
     background-color: #c8c8c8;
-}
-
-.wmp-frame {
-    background-color: #e8e8e8;
-    border: 2px solid #999;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-.wmp-titlebar {
-    background-color: #dcdcdc;
-    color: #333;
-    padding: 10px;
-    border-bottom: 2px solid #999;
-    border-radius: 10px 10px 0 0;
-}
-
-.wmp-display {
-    background-color: #f0f0f0;
-    border: 2px solid #999;
-    height: 200px;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-.visualizer-mode-box select {
-    background-color: #dcdcdc;
-    color: #000;
-    border: 1px solid #888;
-    padding: 5px;
-    border-radius: 5px;
-    margin-top: 10px;
 }
