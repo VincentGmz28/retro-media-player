@@ -62,7 +62,13 @@ function loadTrack(index) {
    PLAYBACK CONTROLS
    ============================ */
 
-playBtn.addEventListener("click", () => audio.play());
+playBtn.addEventListener("click", () => {
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+  audio.play();
+});
+
 pauseBtn.addEventListener("click", () => audio.pause());
 
 stopBtn.addEventListener("click", () => {
@@ -161,11 +167,16 @@ function formatTime(sec) {
    ============================ */
 
 const audioCtx = new AudioContext();
-const source = audioCtx.createMediaElementSource(audio);
 const analyser = audioCtx.createAnalyser();
 
-source.connect(analyser);
-analyser.connect(audioCtx.destination);
+function initVisualizer() {
+  if (initVisualizer.done) return;
+  initVisualizer.done = true;
+
+  const source = audioCtx.createMediaElementSource(audio);
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+}
 
 analyser.fftSize = 256;
 const bufferLength = analyser.frequencyBinCount;
@@ -186,12 +197,12 @@ function draw() {
 
   if (mode === "bars") drawBars();
   else if (mode === "wave") drawWave();
-  else if (mode === "circle") drawCircle(); // starfield
-  else if (mode === "dots") drawEnergyBliss(); // new mode
+  else if (mode === "circle") drawCircle();
+  else if (mode === "dots") drawEnergyBliss();
 }
 
 /* ============================
-   MODE: BARS (Windows 2000 Blue)
+   MODE: BARS
    ============================ */
 
 function drawBars() {
@@ -204,7 +215,7 @@ function drawBars() {
 }
 
 /* ============================
-   MODE: WAVE (Calm Aqua)
+   MODE: WAVE
    ============================ */
 
 function drawWave() {
@@ -225,7 +236,7 @@ function drawWave() {
 }
 
 /* =======================
-   MODE: STARFIELD 
+   MODE: STARFIELD
    ======================= */
 
 function drawCircle() {
@@ -248,7 +259,7 @@ function drawCircle() {
 }
 
 /* ======================
-   MODE: ENERGY BLISS 
+   MODE: ENERGY BLISS
    ====================== */
 
 function drawEnergyBliss() {
@@ -262,7 +273,7 @@ function drawEnergyBliss() {
     const x = centerX + Math.cos(angle) * radius;
     const y = centerY + Math.sin(angle) * radius;
 
-    ctx.fillStyle = "#4AA3D8"; // soft aqua glow
+    ctx.fillStyle = "#4AA3D8";
     ctx.globalAlpha = 0.7;
 
     ctx.beginPath();
