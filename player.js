@@ -202,10 +202,20 @@ function draw() {
   requestAnimationFrame(draw);
 
   analyser.getByteFrequencyData(dataArray);
+   
+const mode = visualizerMode.value;
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (mode === "bars") {
+    ctx.fillStyle = "#0A0A0A"; // dark grey
+  } else if (mode === "wave") {
+    ctx.fillStyle = "#001122"; // deep blue
+  } else if (mode === "circle") {
+    ctx.fillStyle = "#000000"; // black (starfield)
+  } else if (mode === "dots") {
+    ctx.fillStyle = "#120012"; // purple tint
+  }
 
-  const mode = visualizerMode.value;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   if (mode === "bars") drawBars();
   else if (mode === "wave") drawWave();
@@ -221,7 +231,7 @@ function drawBars() {
   const barWidth = canvas.width / bufferLength;
   for (let i = 0; i < bufferLength; i++) {
     const barHeight = dataArray[i];
-    ctx.fillStyle = "get2006Color()";
+    ctx.fillStyle = "get2006Color";
     ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth, barHeight);
   }
 }
@@ -231,30 +241,46 @@ function drawBars() {
    ============================ */
 
 function drawWave() {
-  
-  if (audio.paused) return;
+  if (audio.paused) {
+    ctx.beginPath();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = get2006Color();
 
+    const mid = canvas.height / 2;
+    const slice = canvas.width / (bufferLength - 1);
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+      const normalized = dataArray[i] / 255;
+      const y = mid + normalized * 40;
+      ctx.lineTo(x, y);
+      x += slice;
+    }
+
+    ctx.stroke();
+    return;
+  }
+
+  // Normal animated wave
   ctx.beginPath();
   ctx.lineWidth = 3;
-  ctx.strokeStyle = "get2006Color()";
+  ctx.strokeStyle = get2006Color();
 
-  const mid = canvas.height / 2;           
-  const slice = canvas.width / bufferLength;
+  const mid = canvas.height / 2;
+  const slice = canvas.width / (bufferLength - 1);
   let x = 0;
 
-  // Bass detection (lower frequencies)
+  // Bass detection
   let bass = 0;
   for (let i = 0; i < bufferLength / 4; i++) {
     bass += dataArray[i];
   }
-  bass = bass / (bufferLength / 4);        
-  const bassBoost = bass * 0.4;            
+  bass = bass / (bufferLength / 4);
+  const bassBoost = bass * 0.4;
 
   for (let i = 0; i < bufferLength; i++) {
     const normalized = dataArray[i] / 255;
-
     const waveHeight = Math.sin(i * 0.15 + audio.currentTime * 4) * 20;
-
     const y = mid + waveHeight + normalized * bassBoost;
 
     ctx.lineTo(x, y);
@@ -294,12 +320,12 @@ function drawCircle() {
   bass = bass / (bufferLength / 4);
   const bassBoost = bass * 0.02; // star speed boost
 
-  ctx.fillStyle = "get2006Color()";
+  ctx.fillStyle = "get2006Color";
 
   for (let star of stars) {
 
-    star.x += Math.cos(star.angle) * (star.speed + bassBoost);
-    star.y += Math.sin(star.angle) * (star.speed + bassBoost);
+    star.x += Math.cos(star.angle) * (star.speed * 0.3 + bassBoost * 0.4);
+    star.y += Math.sin(star.angle) * (star.speed * 0.3 + bassBoost * 0.4);
 
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
