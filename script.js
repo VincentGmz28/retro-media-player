@@ -1,11 +1,9 @@
-// Theme switching
 function setSkin(skinFile) {
     document.getElementById("skinStylesheet").href = skinFile;
 }
 
-// Visualizer mode switching
 const visualizerModeSelect = document.getElementById("visualizer-mode");
-const visualizerModes = ["Bars", "Wave", "Circle", "Dots"];
+const visualizerModes = ["bars", "wave", "circle", "dots"];
 
 visualizerModes.forEach(mode => {
     const option = document.createElement("option");
