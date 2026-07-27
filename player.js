@@ -251,15 +251,15 @@ function drawWave() {
 
   analyser.getByteFrequencyData(dataArray);
   ctx.beginPath();
-  ctx.lineWidth = 4;
+  ctx.lineWidth = 3;
   ctx.strokeStyle = get2006Color(0.8);
 
   const slice = (canvas.width / bufferLength) * 3;
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
-    const v = dataArray[i] / 255;
-    const y = canvas.height / 2 + (v - 0.5) * 35;
+    const v = (dataArray[i] / 255); * 1.4;
+    const y = canvas.height / 2 + (v - 0.5) * 45;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
     x += slice;
