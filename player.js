@@ -224,19 +224,6 @@ function draw() {
 }
 
 /* ============================
-   MODE: BARS
-   ============================ */
-
-function drawBars() {
-  const barWidth = canvas.width / bufferLength;
-  for (let i = 0; i < bufferLength; i++) {
-    const barHeight = dataArray[i];
-    ctx.fillStyle = "hsl(200, 90%, 60%)";
-    ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth, barHeight);
-  }
-}
-
-/* ============================
    MODE: WAVE
    ============================ */
 
@@ -261,67 +248,6 @@ function drawWave() {
   }
 
   ctx.stroke();
-}
-
-/* ============================
-   MODE: STARFIELD
-   ============================ */
-
-let stars = [];
-const STAR_COUNT = 120;
-
-function initStars() {
-  stars = Array.from({ length: STAR_COUNT }, () => ({
-    x: canvas.width / 2,
-    y: canvas.height / 2,
-    angle: Math.random() * Math.PI * 2,
-    speed: Math.random() * 0.5 + 0.5,
-    size: Math.random() * 2 + 1
-  }));
-}
-
-initStars();
-
-function drawCircle() {
-  ctx.fillStyle = "#111111";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "hsla(0, 0%, 95%, 0.9)";
-
-  if (audio.paused) {
-    for (const star of stars) {
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    return;
-  }
-
-  let bass = 0;
-  for (let i = 0; i < bufferLength / 4; i++) bass += dataArray[i];
-  bass = bass / (bufferLength / 4);
-  const bassBoost = bass * 0.02;
-
-  for (const star of stars) {
-    const movement = star.speed * 0.2 + bassBoost * 0.2;
-    star.x += Math.cos(star.angle) * movement;
-    star.y += Math.sin(star.angle) * movement;
-
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-    ctx.fill();
-
-    if (
-      star.x < 0 || star.x > canvas.width ||
-      star.y < 0 || star.y > canvas.height
-    ) {
-      star.x = canvas.width / 2;
-      star.y = canvas.height / 2;
-      star.angle = Math.random() * Math.PI * 2;
-      star.speed = Math.random() * 0.5 + 0.5;
-      star.size = Math.random() * 2 + 1;
-    }
-  }
 }
 
 /* ============================
