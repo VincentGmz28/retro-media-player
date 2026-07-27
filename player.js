@@ -206,13 +206,13 @@ function draw() {
   const mode = visualizerMode.value;
 
   if (mode === "bars") {
-    ctx.fillStyle = "#0A0A0A";
+    ctx.fillStyle = "#0E2233";
   } else if (mode === "wave") {
     ctx.fillStyle = "#001122";
   } else if (mode === "circle") {
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = "#111111";
   } else if (mode === "dots") {
-    ctx.fillStyle = "#120012";
+    ctx.fillStyle = "#F5F5F5";
   }
 
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -231,7 +231,7 @@ function drawBars() {
   const barWidth = canvas.width / bufferLength;
   for (let i = 0; i < bufferLength; i++) {
     const barHeight = dataArray[i];
-    ctx.fillStyle = get2006Color();
+    ctx.fillStyle = "hsl(200, 90%, 60%)";
     ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth, barHeight);
   }
 }
@@ -326,7 +326,7 @@ function drawCircle() {
   bass = bass / (bufferLength / 4);
   const bassBoost = bass * 0.02;
 
-  ctx.fillStyle = get2006Color();
+  ctx.fillStyle = "hsla(0, 0%, 95%, 0.9)";
 
   for (let star of stars) {
     star.x += Math.cos(star.angle) * (star.speed * 0.2 + bassBoost * 0.2);
@@ -364,7 +364,7 @@ function drawEnergyBliss() {
     const x = centerX + Math.cos(angle) * radius;
     const y = centerY + Math.sin(angle) * radius;
 
-    ctx.fillStyle = get2006Color(0.7);
+    ctx.fillStyle = "hsla(330, 80%, 85%, 1)";
     ctx.globalAlpha = 0.7;
 
     ctx.beginPath();
