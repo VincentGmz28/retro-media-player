@@ -259,7 +259,7 @@ function drawBars() {
     const v = dataArray[i];
     const barHeight = v * bassScale;
 
-    ctx.fillStyle = get2006Color(0.9);
+    ctx.fillStyle = "hsl(200, 90%, 60%)";
     ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
 
     x += barWidth;
@@ -275,16 +275,20 @@ function drawWave() {
 
   ctx.beginPath();
   ctx.lineWidth = 3;
-  ctx.strokeStyle = get2006Color();
+  ctx.strokeStyle = get2006Color(0.8);
 
   const slice = canvas.width / bufferLength;
   let x = 0;
 
   for (let i = 0; i < bufferLength; i++) {
     const v = dataArray[i] / 255;
-    const y = v * canvas.height;
+
+    // SMOOTHING + REDUCED MOTION
+    const y = canvas.height / 2 + (v - 0.5) * 80;
+
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
+
     x += slice;
   }
 
