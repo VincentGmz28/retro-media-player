@@ -1,12 +1,30 @@
-/* Tron Theme */
+/* ============================
+   TRON THEME — FULL VERSION
+   ============================ */
 
+/* Animated Grid Background */
 body.tron-theme {
   background: #000;
   color: #00eaff;
+
+  background-image:
+    linear-gradient(#00eaff 1px, transparent 1px),
+    linear-gradient(90deg, #00eaff 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: tronGridMove 6s linear infinite;
+}
+
+@keyframes tronGridMove {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 40px 40px, 40px 40px;
+  }
 }
 
 /* Frame */
-.wmp-frame {
+body.tron-theme .wmp-frame {
   background: #000;
   border: 2px solid #00eaff;
   box-shadow:
@@ -15,21 +33,21 @@ body.tron-theme {
 }
 
 /* Title Bar */
-.wmp-titlebar {
+body.tron-theme .wmp-titlebar {
   background: #001f2f;
   color: #00eaff;
   border-bottom: 2px solid #00eaff;
   text-shadow: 0 0 6px #00eaff;
 }
 
-.wmp-icon {
+body.tron-theme .wmp-icon {
   background: #000;
   border-radius: 3px;
   box-shadow: 0 0 6px #00eaff;
 }
 
 /* Display */
-.wmp-display {
+body.tron-theme .wmp-display {
   background: #000;
   border: 2px solid #00eaff;
   box-shadow:
@@ -38,8 +56,8 @@ body.tron-theme {
 }
 
 /* Visualizer */
-.visualizer,
-.tron-visualizer {
+body.tron-theme .visualizer,
+body.tron-theme .tron-visualizer {
   background-color: #000 !important;
   border: 2px solid #00eaff;
   box-shadow:
@@ -48,7 +66,7 @@ body.tron-theme {
 }
 
 /* Track Info */
-.wmp-track-info {
+body.tron-theme .wmp-track-info {
   background: #000;
   border-top: 1px solid #00eaff;
   border-bottom: 1px solid #00eaff;
@@ -56,7 +74,7 @@ body.tron-theme {
 }
 
 /* Controls */
-.wmp-btn {
+body.tron-theme .wmp-btn {
   border: 2px solid #00eaff;
   background: #000;
   color: #00eaff;
@@ -65,33 +83,33 @@ body.tron-theme {
     0 0 10px #00eaff;
 }
 
-.wmp-btn:hover {
+body.tron-theme .wmp-btn:hover {
   background: #001f2f;
 }
 
 /* Seek + Volume */
-#seek-bar,
-#volume-bar {
+body.tron-theme #seek-bar,
+body.tron-theme #volume-bar {
   accent-color: #00eaff;
 }
 
 /* Status Bar */
-.wmp-status {
+body.tron-theme .wmp-status {
   background: #000;
   color: #00eaff;
   border-top: 1px solid #00eaff;
 }
 
-/* Sidebar */
-#sidebar,
-#profile-header,
-#footer {
+/* Sidebar + Header + Footer */
+body.tron-theme #sidebar,
+body.tron-theme #profile-header,
+body.tron-theme #footer {
   border: 2px solid #00eaff;
   background: #000;
   box-shadow: 0 0 10px #00eaff;
 }
 
-.profile-pic {
+body.tron-theme .profile-pic {
   background: #000;
   border: 2px solid #00eaff;
   box-shadow: inset 0 0 10px #00eaff;
