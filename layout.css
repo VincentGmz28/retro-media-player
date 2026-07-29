@@ -1,5 +1,6 @@
 /* ============================
    MYSPACE-STYLE STRUCTURE LAYOUT
+   80s RETRO DARK GREY WMP FRAME
    ============================ */
 
 /* Page Wrapper */
@@ -21,19 +22,21 @@
 #sidebar {
   width: 260px;
   padding: 15px;
-  border: 1px solid #ccc;
-  background: #fafafa;
-  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+  border: 1px solid #444;
+  background: #2b2b2b;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+  color: #e6e6e6;
 }
 
 /* Sidebar Modules */
 .about-box,
 .links-box {
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid #555;
+  background: #3a3a3a;
   padding: 10px;
   margin-bottom: 15px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  color: #e6e6e6;
 }
 
 /* Main Content */
@@ -41,14 +44,24 @@
   flex: 1;
 }
 
+/* ============================
+   80s RETRO DARK WMP FRAME
+   ============================ */
+
 .wmp-frame {
   width: 100%;
   max-width: 600px;
   min-height: 200px;
   padding: 10px;
-  border: 1px solid #ccc;
-  background: #fff;
-  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+
+  /* 80s dark grey metal */
+  background: #1f1f1f;
+  border: 2px solid #555;
+
+  /* Retro CRT glow */
+  box-shadow:
+    0 0 10px rgba(0,0,0,0.8),
+    inset 0 0 12px rgba(255,255,255,0.05);
 }
 
 /* Title Bar */
@@ -57,16 +70,19 @@
   align-items: center;
   gap: 10px;
   padding: 6px 10px;
-  border-bottom: 1px solid #ccc;
-  background: linear-gradient(#fdfdfd, #f2f2f2);
+
+  /* 80s brushed metal */
+  background: linear-gradient(#3a3a3a, #2a2a2a);
+  border-bottom: 2px solid #555;
+  color: #e6e6e6;
 }
 
 /* Icon */
 .wmp-icon {
   width: 20px;
   height: 20px;
-  background: #ddd;
-  border: 1px solid #bbb;
+  background: #555;
+  border: 1px solid #777;
 }
 
 /* Visualizer Display Box */
@@ -75,9 +91,13 @@
   height: 240px;
   position: relative;
   overflow: hidden;
-  border: 1px solid #ccc;
-  background: #f9f9f9;
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+
+  /* CRT screen look */
+  background: #111;
+  border: 2px solid #555;
+  box-shadow:
+    inset 0 0 10px rgba(0,255,255,0.1),
+    inset 0 0 25px rgba(0,0,0,0.8);
 }
 
 /* Canvas */
@@ -92,8 +112,11 @@
   padding: 6px 10px;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+
+  background: #2a2a2a;
+  border-top: 2px solid #555;
+  border-bottom: 2px solid #555;
+  color: #e6e6e6;
 }
 
 /* Controls */
@@ -108,12 +131,24 @@
   width: 40px;
   height: 40px;
   font-size: 18px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 1px solid #ccc;
-  background: #f7f7f7;
+
+  background: #3a3a3a;
+  border: 2px solid #666;
+  color: #e6e6e6;
+
+  /* Retro clicky buttons */
+  box-shadow:
+    inset 0 0 4px rgba(255,255,255,0.1),
+    0 0 6px rgba(0,0,0,0.4);
+}
+
+.wmp-btn:hover {
+  background: #4a4a4a;
 }
 
 /* Seek + Volume */
@@ -132,7 +167,10 @@
   padding: 6px 10px;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #ccc;
+
+  background: #2a2a2a;
+  border-top: 2px solid #555;
+  color: #e6e6e6;
 }
 
 /* Footer */
@@ -140,5 +178,8 @@
   margin-top: 20px;
   padding: 10px;
   text-align: center;
-  border-top: 1px solid #ccc;
+
+  background: #2b2b2b;
+  border-top: 2px solid #555;
+  color: #e6e6e6;
 }
