@@ -36,12 +36,12 @@ const playlist = [
   {
     title: "No Plan",
     artist: "Hozier",
-    file: "Hozier - No Plan (Audio).mp3"
+    file: "No Plan.mp3"
   },
   {
     title: "Anyone",
     artist: "Demi Lovato",
-    file: "Demi Lovato - Anyone (Official Lyric Video).mp3"
+    file: "anyone.mp3"
   }
 ];
 
@@ -361,16 +361,15 @@ function setSkin(skinFile) {
   document.getElementById("skinStylesheet").href = skinFile;
 }
 
-const visualizerModeSelect = document.getElementById("visualizer-mode");
 const visualizerModes = ["bars", "wave", "circle", "dots"];
 
 visualizerModes.forEach(mode => {
   const option = document.createElement("option");
   option.value = mode;
   option.textContent = mode;
-  visualizerModeSelect.appendChild(option);
+  visualizerMode.appendChild(option);
 });
 
-visualizerModeSelect.addEventListener("change", () => {
-  console.log("Visualizer mode changed to:", visualizerModeSelect.value);
+visualizerMode.addEventListener("change", () => {
+  console.log("Visualizer mode changed to:", visualizerMode.value);
 });
