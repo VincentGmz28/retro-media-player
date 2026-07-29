@@ -176,14 +176,9 @@ let bgHue = 0;
 let orbAngle = 0;
 let stripeOffset = 0;
 
-function bgBars() {
-  stripeOffset += 1;
-  ctx.fillStyle = "#0E2233";
+function bgHypnobloom() {
+  ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "rgba(255,255,255,0.05)";
-  for (let i = -50; i < canvas.width; i += 50) {
-    ctx.fillRect(i + stripeOffset, 0, 25, canvas.height);
-  }
 }
 
 function bgWave() {
@@ -237,35 +232,43 @@ function draw() {
   analyser.getByteFrequencyData(dataArray);
   const mode = visualizerMode.value;
 
-  if (mode === "bars") bgBars();
+  if (mode === "bars") bgHypnobloom();
   else if (mode === "wave") bgWave();
   else if (mode === "circle") bgCircle();
   else if (mode === "dots") bgDots();
   else if (mode === "battery") bgBattery();
 
-  if (mode === "bars") drawBars();
+  if (mode === "bars") drawHypnobloom();
   else if (mode === "wave") drawWave();
   else if (mode === "circle") drawCircle();
   else if (mode === "dots") drawEnergyBliss();
   else if (mode === "battery") drawBattery();
 }
 
-function drawBars() {
+function drawHypnobloom() {
+  analyser.getByteFrequencyData(dataArray);
+
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+
   let bass = 0;
   for (let i = 0; i < bufferLength / 4; i++) bass += dataArray[i];
   bass = bass / (bufferLength / 4);
-  const bassScale = 0.8 + bass * 0.003;
 
-  const barWidth = (canvas.width / bufferLength) * 2;
-  let x = 0;
+  const radius = bass * 0.8 + 40;
+  const gradient = ctx.createRadialGradient(
+    centerX, centerY, radius * 0.2,
+    centerX, centerY, radius * 1.4
+  );
 
-  for (let i = 0; i < bufferLength; i++) {
-    const v = dataArray[i];
-    const barHeight = v * bassScale * 0.5;
-    ctx.fillStyle = "hsl(200, 90%, 60%)";
-    ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-    x += barWidth;
-  }
+  gradient.addColorStop(0, `hsla(${(bass * 2) % 360}, 100%, 70%, 1)`);
+  gradient.addColorStop(0.5, `hsla(${(bass * 2 + 60) % 360}, 100%, 50%, 0.8)`);
+  gradient.addColorStop(1, "rgba(0,0,0,0)");
+
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius * 1.4, 0, Math.PI * 2);
+  ctx.fill();
 }
 
 function drawWave() {
