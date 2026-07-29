@@ -32,7 +32,17 @@ const playlist = [
     title: "So Long, London",
     artist: "Taylor Swift",
     file: "Taylor Swift - So Long, London (Official Lyric Video).mp3"
-  }
+  },
+  {
+    title: "No Plan",
+    artist: "Hozier",
+    file: "Hozier - No Plan (Audio).mp3"
+  },
+  {
+    title: "Anyone",
+    artist: "Demi Lovato",
+    file: "Demi Lovato - Anyone (Official Lyric Video).mp3"
+  }  
 ];
 
 let currentTrack = 0;
