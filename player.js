@@ -36,12 +36,12 @@ const playlist = [
   {
     title: "No Plan",
     artist: "Hozier",
-    file: "No Plan.mp3"
+    file: "Hozier - No Plan (Audio).mp3"
   },
   {
     title: "Anyone",
     artist: "Demi Lovato",
-    file: "anyone.mp3"
+    file: "Demi Lovato - Anyone (Official Lyric Video).mp3"
   }
 ];
 
