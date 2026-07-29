@@ -23,7 +23,7 @@ canvas.width = 600;
 canvas.height = 200;
 
 const playlist = [
-  {
+{
     title: "Lose Yourself to Dance",
     artist: "Daft Punk",
     file: "Daft Punk - Lose Yourself to Dance (Official Version).mp3"
@@ -42,7 +42,7 @@ const playlist = [
     title: "Anyone",
     artist: "Demi Lovato",
     file: "anyone.mp3"
-  }  
+  }
 ];
 
 let currentTrack = 0;
