@@ -23,7 +23,7 @@ canvas.width = 600;
 canvas.height = 200;
 
 const playlist = [
-{
+  {
     title: "Lose Yourself to Dance",
     artist: "Daft Punk",
     file: "Daft Punk - Lose Yourself to Dance (Official Version).mp3"
@@ -64,7 +64,6 @@ let visualizerReady = false;
 function initVisualizer() {
   if (visualizerReady) return;
   visualizerReady = true;
-
   const source = audioCtx.createMediaElementSource(audio);
   source.connect(analyser);
   analyser.connect(audioCtx.destination);
@@ -131,7 +130,6 @@ audio.addEventListener("ended", () => {
 
 audio.addEventListener("timeupdate", () => {
   if (!audio.duration || isNaN(audio.duration)) return;
-
   seekBar.value = (audio.currentTime / audio.duration) * 100;
   currentTimeEl.textContent = formatTime(audio.currentTime);
   durationEl.textContent = formatTime(audio.duration);
@@ -265,7 +263,6 @@ function drawBars() {
 
 function drawWave() {
   if (audio.paused) return;
-
   analyser.getByteFrequencyData(dataArray);
   ctx.beginPath();
   ctx.lineWidth = 3;
@@ -359,3 +356,21 @@ function drawEnergyBliss() {
 
 draw();
 loadTrack(currentTrack);
+
+function setSkin(skinFile) {
+  document.getElementById("skinStylesheet").href = skinFile;
+}
+
+const visualizerModeSelect = document.getElementById("visualizer-mode");
+const visualizerModes = ["bars", "wave", "circle", "dots"];
+
+visualizerModes.forEach(mode => {
+  const option = document.createElement("option");
+  option.value = mode;
+  option.textContent = mode;
+  visualizerModeSelect.appendChild(option);
+});
+
+visualizerModeSelect.addEventListener("change", () => {
+  console.log("Visualizer mode changed to:", visualizerModeSelect.value);
+});
