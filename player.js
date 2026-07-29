@@ -227,6 +227,11 @@ function bgDots() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+function bgBattery() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
 function draw() {
   requestAnimationFrame(draw);
   analyser.getByteFrequencyData(dataArray);
@@ -236,11 +241,13 @@ function draw() {
   else if (mode === "wave") bgWave();
   else if (mode === "circle") bgCircle();
   else if (mode === "dots") bgDots();
+  else if (mode === "battery") bgBattery();
 
   if (mode === "bars") drawBars();
   else if (mode === "wave") drawWave();
   else if (mode === "circle") drawCircle();
   else if (mode === "dots") drawEnergyBliss();
+  else if (mode === "battery") drawBattery();
 }
 
 function drawBars() {
@@ -354,6 +361,32 @@ function drawEnergyBliss() {
   ctx.globalAlpha = 1.0;
 }
 
+function drawBattery() {
+  analyser.getByteFrequencyData(dataArray);
+
+  const blockCount = 20;
+  const blockWidth = canvas.width / blockCount;
+  const maxHeight = canvas.height * 0.9;
+
+  for (let i = 0; i < blockCount; i++) {
+    const v = dataArray[i] / 255;
+    const height = v * maxHeight;
+
+    const x = i * blockWidth;
+    const y = canvas.height - height;
+
+    const glow = Math.floor(v * 255);
+    ctx.fillStyle = `rgba(${glow}, ${glow}, 255, 0.9)`;
+
+    ctx.shadowColor = `rgba(${glow}, ${glow}, 255, 1)`;
+    ctx.shadowBlur = 20;
+
+    ctx.fillRect(x + 4, y, blockWidth - 8, height);
+  }
+
+  ctx.shadowBlur = 0;
+}
+
 draw();
 loadTrack(currentTrack);
 
@@ -361,7 +394,7 @@ function setSkin(skinFile) {
   document.getElementById("skinStylesheet").href = skinFile;
 }
 
-const visualizerModes = ["bars", "wave", "circle", "dots"];
+const visualizerModes = ["bars", "wave", "circle", "dots", "battery"];
 
 visualizerModes.forEach(mode => {
   const option = document.createElement("option");
